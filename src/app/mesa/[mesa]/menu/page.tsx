@@ -8,5 +8,5 @@ export const metadata: Metadata = { title: "Nuestra carta — Lumbre", descripti
 export default async function TableMenuRoute({ params }: { params: Promise<{ mesa: string }> }) {
   const { mesa } = await params;
   const context = getTableRouteContext(mesa);
-  return <MenuPage tableLabel={context.tableLabel} homePath={context.basePath} />;
+  return <MenuPage tableLabel={context.tableLabel} homePath={context.basePath} menuPath={`${context.basePath}/menu`} />;
 }

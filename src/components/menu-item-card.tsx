@@ -1,12 +1,12 @@
 import Image from "next/image";
 
-import type { MenuItem } from "@/lib/menu-data";
+import type { MenuCategoryAccent, MenuItem } from "@/lib/menu-data";
 
-interface MenuItemCardProps { item: MenuItem; onSelect: (item: MenuItem) => void; }
+interface MenuItemCardProps { item: MenuItem; onSelect: (item: MenuItem) => void; variant?: MenuCategoryAccent; }
 
-export function MenuItemCard({ item, onSelect }: MenuItemCardProps) {
+export function MenuItemCard({ item, onSelect, variant = "entradas" }: MenuItemCardProps) {
   return (
-    <button type="button" className="menu-item-card w-full text-left" onClick={() => onSelect(item)} aria-label={`Ver detalle de ${item.name}`}>
+    <button type="button" className="menu-item-card w-full text-left" data-variant={variant} onClick={() => onSelect(item)} aria-label={`Ver detalle de ${item.name}`}>
       <div className="menu-item-visual">
         <Image src={item.image} alt={item.name} fill sizes="(max-width: 640px) 100vw, 28rem" className="object-cover" />
         {item.tags?.includes("Recomendado") ? <span className="menu-featured">Recomendado</span> : null}
