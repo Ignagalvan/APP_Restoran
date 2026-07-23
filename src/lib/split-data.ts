@@ -25,6 +25,7 @@ interface CreatePaymentDraftInput {
   mode: SplitMode;
   selectedQuantities: Record<string, number>;
   people: number;
+  fixedAmount?: number;
 }
 
 export const getAccountTotal = (account: AccountData = accountData) =>
@@ -39,6 +40,7 @@ export const createPaymentDraft = ({
   mode,
   selectedQuantities,
   people,
+  fixedAmount,
 }: CreatePaymentDraftInput): PaymentDraft | null => {
   if (mode !== "products" && mode !== "equal" && mode !== "full") return null;
 
@@ -46,6 +48,7 @@ export const createPaymentDraft = ({
   if (accountTotal <= 0) return null;
 
   const normalizedPeople = Math.min(10, Math.max(2, Math.trunc(Number.isFinite(people) ? people : 2)));
+  const fixedDraftAmount = Number.isFinite(fixedAmount) ? fixedAmount : undefined;
   const selectedProducts =
     mode === "products"
       ? account.items.flatMap((item) => {
@@ -62,7 +65,7 @@ export const createPaymentDraft = ({
     mode === "products"
       ? selectedProducts.reduce((total, item) => total + item.subtotal, 0)
       : mode === "equal"
-        ? Math.ceil(accountTotal / normalizedPeople)
+        ? Math.min(accountTotal, Math.max(0, Math.trunc(fixedDraftAmount ?? Math.ceil(accountTotal / normalizedPeople))))
         : accountTotal;
 
   if (!Number.isFinite(amount) || amount <= 0) return null;
