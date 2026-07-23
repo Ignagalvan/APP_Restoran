@@ -1,0 +1,179 @@
+{
+  "restaurants": [
+    {
+      "id": "rst_lumbre",
+      "name": "Lumbre",
+      "slug": "lumbre",
+      "integrationMode": "external",
+      "integrationStatus": "connected",
+      "createdAt": "2026-07-08T00:00:00.000Z",
+      "updatedAt": "2026-07-08T00:00:00.000Z"
+    }
+  ],
+  "tables": [
+    {
+      "id": "tbl_lumbre_12",
+      "restaurantId": "rst_lumbre",
+      "externalTableId": "mesa-12",
+      "label": "Mesa 12",
+      "qrCode": "lumbre-mesa-12",
+      "status": "occupied",
+      "createdAt": "2026-07-08T00:00:00.000Z",
+      "updatedAt": "2026-07-08T17:39:56.663Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "ses_lumbre_12_active",
+      "restaurantId": "rst_lumbre",
+      "tableId": "tbl_lumbre_12",
+      "externalTicketId": "ticket-demo-002",
+      "status": "active",
+      "openedAt": "2026-07-08T00:00:00.000Z"
+    }
+  ],
+  "accounts": [
+    {
+      "id": "acc_lumbre_12_active",
+      "restaurantId": "rst_lumbre",
+      "sessionId": "ses_lumbre_12_active",
+      "externalAccountId": "ticket-demo-002",
+      "subtotal": 67500,
+      "discounts": 0,
+      "tip": 0,
+      "total": 67500,
+      "paidTotal": 0,
+      "status": "open",
+      "lastSyncedAt": "2026-07-08T17:39:56.664Z"
+    }
+  ],
+  "accountItems": [
+    {
+      "id": "itm_burrata",
+      "restaurantId": "rst_lumbre",
+      "accountId": "acc_lumbre_12_active",
+      "externalItemId": "burrata",
+      "name": "Burrata ahumada",
+      "category": "Entradas",
+      "quantity": 1,
+      "unitPrice": 9800,
+      "total": 9800,
+      "status": "active"
+    },
+    {
+      "id": "itm_bife",
+      "restaurantId": "rst_lumbre",
+      "accountId": "acc_lumbre_12_active",
+      "externalItemId": "bife",
+      "name": "Ojo de bife",
+      "category": "Principales",
+      "quantity": 2,
+      "unitPrice": 19500,
+      "total": 39000,
+      "status": "active"
+    },
+    {
+      "id": "itm_malbec",
+      "restaurantId": "rst_lumbre",
+      "accountId": "acc_lumbre_12_active",
+      "externalItemId": "malbec",
+      "name": "Malbec copa",
+      "category": "Bebidas",
+      "quantity": 2,
+      "unitPrice": 5800,
+      "total": 11600,
+      "status": "active"
+    },
+    {
+      "id": "itm_cheesecake",
+      "restaurantId": "rst_lumbre",
+      "accountId": "acc_lumbre_12_active",
+      "externalItemId": "cheesecake",
+      "name": "Cheesecake citrico",
+      "category": "Postres",
+      "quantity": 1,
+      "unitPrice": 7100,
+      "total": 7100,
+      "status": "active"
+    }
+  ],
+  "payments": [
+    {
+      "id": "pay_3d0687de-36f5-49e6-851d-d6dad310ed5f",
+      "restaurantId": "rst_lumbre",
+      "accountId": "acc_lumbre_12_active",
+      "sessionId": "ses_lumbre_12_active",
+      "amount": 1000,
+      "method": "checkout_pro",
+      "provider": "mercado_pago_checkout_pro",
+      "status": "pending",
+      "externalTransactionId": "3362674931-669155f6-0f5a-45b2-8551-5079dda817ba",
+      "createdAt": "2026-07-08T18:44:11.795Z"
+    },
+    {
+      "id": "pay_4a105add-3ed2-406d-a2f6-ee038bcf820f",
+      "restaurantId": "rst_lumbre",
+      "accountId": "acc_lumbre_12_active",
+      "sessionId": "ses_lumbre_12_active",
+      "amount": 67500,
+      "method": "checkout_pro",
+      "provider": "mercado_pago_checkout_pro",
+      "status": "pending",
+      "externalTransactionId": "3362674931-73efe871-8775-498b-95a1-7c06e50ea187",
+      "createdAt": "2026-07-08T18:46:32.391Z"
+    },
+    {
+      "id": "pay_37c14c86-feb7-46ad-82e9-1b855810dc35",
+      "restaurantId": "rst_lumbre",
+      "accountId": "acc_lumbre_12_active",
+      "sessionId": "ses_lumbre_12_active",
+      "amount": 77625,
+      "method": "checkout_pro",
+      "provider": "mercado_pago_checkout_pro",
+      "status": "pending",
+      "externalTransactionId": "3362674931-3ecb70ab-ddc4-49ca-a1a3-d310ea9305f4",
+      "createdAt": "2026-07-08T19:02:15.032Z"
+    },
+    {
+      "id": "pay_66565eed-f898-45b2-a668-d07a1175589c",
+      "restaurantId": "rst_lumbre",
+      "accountId": "acc_lumbre_12_active",
+      "sessionId": "ses_lumbre_12_active",
+      "amount": 77625,
+      "method": "checkout_pro",
+      "provider": "mercado_pago_checkout_pro",
+      "status": "pending",
+      "externalTransactionId": "3362674931-55442a0d-b6d4-457d-8a2b-7e15c319e314",
+      "createdAt": "2026-07-08T19:02:55.558Z"
+    }
+  ],
+  "billSplits": [],
+  "feedback": [
+    {
+      "id": "fbk_de289e66-9427-463d-866a-52f3c1cda355",
+      "restaurantId": "rst_lumbre",
+      "sessionId": "ses_lumbre_12_active",
+      "accountId": "acc_lumbre_12_active",
+      "rating": 5,
+      "comment": "Muy buena experiencia",
+      "tags": [
+        "rapido",
+        "claro"
+      ],
+      "sentiment": "positive",
+      "reviewStatus": "new",
+      "createdAt": "2026-07-08T17:40:05.305Z"
+    }
+  ],
+  "integrations": [
+    {
+      "id": "int_lumbre_external",
+      "restaurantId": "rst_lumbre",
+      "provider": "external_pos_demo",
+      "status": "connected",
+      "endpoint": "https://example.com/pos/lumbre",
+      "createdAt": "2026-07-08T00:00:00.000Z",
+      "updatedAt": "2026-07-08T00:00:00.000Z"
+    }
+  ]
+}
