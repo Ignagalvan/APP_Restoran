@@ -105,10 +105,9 @@ export function SplitExperience({ account = accountData, paymentPath = "/payment
           progress={overview.progress}
           ready={ready}
           statusText={statusText}
-          messages={overview.messages}
         />
-        <Button size="hero" className="mt-3 w-full justify-between disabled:cursor-not-allowed disabled:bg-foreground/12 disabled:text-muted-foreground disabled:opacity-70 disabled:shadow-none disabled:hover:translate-y-0 disabled:active:scale-100" disabled={!ready} onClick={preparePayment}><span>Continuar</span><ArrowRight className="size-5" /></Button>
-        <p className="mt-2 min-h-5 text-center text-xs text-muted-foreground" role="status" aria-live="polite">{ready ? "Tu seleccion se envia a la misma pantalla de pago." : "No se puede pagar algo que ya esta pagado o en proceso."}</p>
+        <Button className="mt-2 h-12 w-full justify-between rounded-xl disabled:cursor-not-allowed disabled:bg-foreground/12 disabled:text-muted-foreground disabled:opacity-70 disabled:shadow-none disabled:hover:translate-y-0 disabled:active:scale-100" disabled={!ready} onClick={preparePayment}><span>Continuar</span><ArrowRight className="size-5" /></Button>
+        <p className="mt-1 min-h-4 text-center text-[.68rem] text-muted-foreground" role="status" aria-live="polite">{ready ? "Tu seleccion va al pago." : "Solo podes elegir items disponibles."}</p>
       </div>
     </div>
   );
