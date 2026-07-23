@@ -8,5 +8,5 @@ export default async function TablePaymentRoute({ params }: { params: Promise<{ 
   const { mesa } = await params;
   const tableLabel = `Mesa ${mesa}`;
 
-  return <PaymentPage tableLabel={tableLabel} splitPath={`/mesa/${mesa}/split`} feedbackPath={`/mesa/${mesa}/feedback`} />;
+  return <PaymentPage tableLabel={tableLabel} accountPath={`/mesa/${mesa}/account`} splitPath={`/mesa/${mesa}/split`} feedbackPath={`/mesa/${mesa}/feedback`} />;
 }

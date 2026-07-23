@@ -8,5 +8,5 @@ export const metadata: Metadata = { title: "Tu consumo — Lumbre", description:
 export default async function TableAccountRoute({ params }: { params: Promise<{ mesa: string }> }) {
   const { mesa } = await params;
   const context = getTableRouteContext(mesa);
-  return <AccountPage tableLabel={context.tableLabel} homePath={context.basePath} splitPath={`${context.basePath}/split`} />;
+  return <AccountPage tableLabel={context.tableLabel} homePath={context.basePath} splitPath={`${context.basePath}/split`} paymentPath={`${context.basePath}/payment`} />;
 }

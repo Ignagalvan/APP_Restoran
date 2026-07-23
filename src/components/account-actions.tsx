@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowRight, RefreshCw } from "lucide-react";
+import { ArrowRight, RefreshCw, Users } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
@@ -8,7 +9,7 @@ import { usePaymentFlow } from "@/components/payment-flow-context";
 import { accountData } from "@/lib/account-data";
 import { createPaymentDraft } from "@/lib/split-data";
 
-export function AccountActions() {
+export function AccountActions({ splitPath = "/split", paymentPath = "/payment" }: { splitPath?: string; paymentPath?: string }) {
   const router = useRouter();
   const { setDraft } = usePaymentFlow();
   const [message, setMessage] = useState<string | null>(null);
@@ -41,7 +42,7 @@ export function AccountActions() {
     }
 
     setDraft(draft);
-    router.push("/payment");
+    router.push(paymentPath);
   };
 
   return (
@@ -50,6 +51,13 @@ export function AccountActions() {
         <RefreshCw className="size-4" />
         Actualizar consumo
       </button>
+      <Link href={splitPath} className="account-secondary-action">
+        <Users className="size-5" />
+        <span>
+          <strong>Dividir pago</strong>
+          <ArrowRight className="size-4" />
+        </span>
+      </Link>
       <button type="button" className="account-primary-action" onClick={prepareFullPayment}>
         <span>Pagar cuenta completa</span>
         <ArrowRight className="size-5" />
