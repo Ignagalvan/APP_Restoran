@@ -43,7 +43,7 @@ export function EqualSplitControl({ people, amount, confirmed, parts, selectedPa
       </div>
 
       {confirmed ? (
-        <div className="split-parts-card">
+        <div className="split-parts-card split-parts-card-spaced">
           <div>
             <h3 className="text-sm font-semibold">Partes de la cuenta</h3>
             <p className="mt-1 text-xs text-muted-foreground">La ultima parte ajusta el redondeo para que el total cierre exacto.</p>
