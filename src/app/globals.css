@@ -267,6 +267,7 @@ a { color: inherit; text-decoration: none; }
 .payment-option-icon { display: grid; width: 2.75rem; height: 2.75rem; flex: none; place-items: center; border-radius: .9rem; color: var(--primary); background: var(--secondary); }
 .payment-option-check { display: grid; width: 1.6rem; height: 1.6rem; place-items: center; border: 1px solid rgba(76,54,42,.15); border-radius: 999px; color: white; }
 .payment-option[data-selected="true"] .payment-option-check { border-color: var(--status); background: var(--status); animation: split-check-in 220ms cubic-bezier(.22,1,.36,1) both; }
+.payment-method-badge { border-radius: 999px; padding: .18rem .4rem; color: var(--primary); background: color-mix(in oklab,var(--primary) 9%,transparent); font-size: .58rem; font-style: normal; font-weight: 800; white-space: nowrap; }
 .tip-option { position: relative; display: grid; min-height: 4.25rem; cursor: pointer; place-items: center; align-content: center; gap: .2rem; border: 1px solid rgba(76,54,42,.1); border-radius: 1rem; color: var(--foreground); background: rgba(255,255,255,.58); font-size: .82rem; font-weight: 750; transition: border-color 200ms ease,background 200ms ease,color 200ms ease,transform 200ms ease,box-shadow 200ms ease; }
 .tip-option small { color: var(--muted-foreground); font-size: .68rem; font-weight: 600; }
 .tip-option:focus-within { outline: 3px solid color-mix(in oklab,var(--ring) 30%,transparent); outline-offset: 2px; }

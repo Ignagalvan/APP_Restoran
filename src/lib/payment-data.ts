@@ -10,6 +10,8 @@ export interface PaymentMethod {
   name: string;
   description: string;
   icon: LucideIcon;
+  enabled: boolean;
+  badge?: string;
 }
 
 export interface PaymentResultData {
@@ -23,10 +25,13 @@ export interface PaymentResultData {
 }
 
 export const paymentMethods: PaymentMethod[] = [
-  { id: "mercado-pago", name: "Mercado Pago", description: "Checkout Pro sandbox", icon: WalletCards },
-  { id: "card", name: "Tarjeta", description: "Se procesa desde Mercado Pago", icon: CreditCard },
-  { id: "cash", name: "Efectivo", description: "Informar pago en la mesa", icon: Banknote },
+  { id: "mercado-pago", name: "Mercado Pago", description: "Checkout Pro sandbox", icon: WalletCards, enabled: true },
+  { id: "card", name: "Tarjeta", description: "Credito, debito y wallets se integran despues", icon: CreditCard, enabled: false, badge: "En trabajo" },
+  { id: "cash", name: "Efectivo", description: "Aviso al mozo y cierre de mesa pendiente", icon: Banknote, enabled: false, badge: "En trabajo" },
 ];
+
+export const isEnabledPaymentMethod = (methodId: PaymentMethodId | null) =>
+  paymentMethods.some((method) => method.id === methodId && method.enabled);
 
 export function isValidPaymentDraft(draft: PaymentDraft | null): draft is PaymentDraft {
   if (!draft || !draft.restaurant.trim() || !draft.table.trim()) return false;

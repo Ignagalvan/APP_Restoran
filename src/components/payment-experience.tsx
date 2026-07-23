@@ -9,7 +9,7 @@ import { PaymentUnavailableState } from "@/components/payment-unavailable-state"
 import { TipSelector } from "@/components/tip-selector";
 import { Button } from "@/components/ui/button";
 import { usePaymentFlow } from "@/components/payment-flow-context";
-import { isValidPaymentDraft, type PaymentMethodId } from "@/lib/payment-data";
+import { isEnabledPaymentMethod, isValidPaymentDraft, type PaymentMethodId } from "@/lib/payment-data";
 import { startMercadoPagoCheckout } from "@/lib/mercado-pago-checkout";
 import { createTipSelection, type TipId } from "@/lib/tip-data";
 
@@ -26,7 +26,7 @@ export function PaymentExperience({ splitPath = "/split" }: { splitPath?: string
   const tipSelection = draft ? createTipSelection({ baseAmount: draft.amount, currency: "ARS" }, tip) : null;
   const tipAmount = tipSelection?.tipAmount ?? 0;
   const totalAmount = tipSelection?.totalAmount ?? (draft?.amount ?? 0);
-  const ready = isValidPaymentDraft(draft) && method !== null && tipSelection !== null && status === "review";
+  const ready = isValidPaymentDraft(draft) && isEnabledPaymentMethod(method) && tipSelection !== null && status === "review";
 
   if (!isValidPaymentDraft(draft)) {
     return (
@@ -37,7 +37,7 @@ export function PaymentExperience({ splitPath = "/split" }: { splitPath?: string
   }
 
   const confirmPayment = async () => {
-    if (!ready || !method || !tipSelection || confirming.current) return;
+    if (!ready || !isEnabledPaymentMethod(method) || !tipSelection || confirming.current) return;
     confirming.current = true;
     setErrorMessage(null);
     setStatus("processing");
@@ -94,10 +94,12 @@ export function PaymentExperience({ splitPath = "/split" }: { splitPath?: string
           {status === "processing"
             ? "Te vamos a redirigir al checkout seguro."
             : !method
-              ? "Elegi un metodo de pago."
+              ? "Elegi Mercado Pago para continuar."
               : tip === null
                 ? "Elegi una opcion de propina."
-                : "Se abrira Mercado Pago Sandbox."}
+                : isEnabledPaymentMethod(method)
+                  ? "Se abrira Mercado Pago Sandbox."
+                  : "Ese metodo esta en trabajo."}
         </p>
       </div>
     </div>
