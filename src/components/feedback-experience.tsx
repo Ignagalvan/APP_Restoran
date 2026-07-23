@@ -10,6 +10,7 @@ import { RatingSelector } from "@/components/rating-selector";
 import { Button } from "@/components/ui/button";
 import { useFeedbackFlow } from "@/components/feedback-flow-context";
 import { createFeedbackResult, feedbackCommentMaxLength, normalizeFeedbackContext, type FeedbackContextData, type FeedbackRating, type FeedbackResultData } from "@/lib/feedback-data";
+import { getGoogleReviewUrl } from "@/lib/google-review";
 
 type FeedbackStatus = "editing" | "submitting" | "success" | "error";
 
@@ -60,6 +61,9 @@ export function FeedbackExperience({ homePath = "/", fallbackContext = null }: {
       setResult(nextResult);
       clearContext();
       setStatus("success");
+      window.setTimeout(() => {
+        window.location.assign(getGoogleReviewUrl());
+      }, 650);
     }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 520);
   };
 
