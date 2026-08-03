@@ -14,15 +14,15 @@ export interface AccountData {
 }
 
 export const accountData: AccountData = {
-  restaurant: "Lumbre",
+  restaurant: "Alma de Pueblo",
   table: "Mesa 12",
   status: "open",
   lastUpdated: "23:42 hs",
   items: [
-    { id: "burrata", name: "Burrata ahumada", quantity: 1, unitPrice: 9800 },
-    { id: "bife", name: "Ojo de bife", quantity: 2, unitPrice: 19500 },
+    { id: "provoleta", name: "Provoleta al hierro", quantity: 1, unitPrice: 9800 },
+    { id: "ravioles", name: "Ravioles de calabaza", quantity: 2, unitPrice: 14500 },
     { id: "malbec", name: "Malbec copa", quantity: 2, unitPrice: 5800 },
-    { id: "cheesecake", name: "Cheesecake cítrico", quantity: 1, unitPrice: 7100 },
+    { id: "tiramisu", name: "Tiramisu della casa", quantity: 1, unitPrice: 7100 },
   ],
 };
 

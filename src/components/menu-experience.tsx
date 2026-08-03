@@ -44,7 +44,7 @@ export function MenuExperience() {
             <div className="space-y-4">{category.items.map((item) => <MenuItemCard key={item.id} item={item} onSelect={setSelectedItem} />)}</div>
           </section>
         ))}
-        <footer className="menu-farewell"><p className="font-display text-3xl font-semibold">Gracias por elegir Lumbre.</p><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Esperamos que disfrutes tu experiencia.</p></footer>
+        <footer className="menu-farewell"><p className="font-display text-3xl font-semibold">Gracias por elegir Alma de Pueblo.</p><p className="mt-2 text-sm leading-relaxed text-muted-foreground">Esperamos que disfrutes tu experiencia.</p></footer>
       </div>
       <MenuBottomSheet item={selectedItem} onClose={closeSheet} />
     </>

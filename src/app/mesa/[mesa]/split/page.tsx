@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { SplitPage } from "@/components/split-page";
 import { getTableRouteContext } from "@/lib/table-context";
 
-export const metadata: Metadata = { title: "Dividir cuenta — Lumbre", description: "División de cuenta por QR de mesa" };
+export const metadata: Metadata = { title: "Dividir cuenta — Alma de Pueblo", description: "División de cuenta por QR de mesa" };
 
 export default async function TableSplitRoute({ params }: { params: Promise<{ mesa: string }> }) {
   const { mesa } = await params;

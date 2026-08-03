@@ -43,8 +43,8 @@ export interface AdminOverview {
 }
 
 const restaurant: AdminRestaurant = {
-  id: "lumbre",
-  name: "Lumbre",
+  id: "alma-de-pueblo",
+  name: "Alma de Pueblo",
   planLabel: "Panel V1 mock",
   serviceLabel: "Servicio de noche",
 };
