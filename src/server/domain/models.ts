@@ -78,6 +78,10 @@ export type PartialPayment = {
   provider: string;
   status: PaymentStatus;
   externalTransactionId?: string;
+  proofFileName?: string;
+  proofMimeType?: string;
+  proofDataUrl?: string;
+  reviewedAt?: string;
   createdAt: string;
   confirmedAt?: string;
 };

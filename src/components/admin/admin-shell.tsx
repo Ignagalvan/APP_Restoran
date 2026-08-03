@@ -1,15 +1,16 @@
-import { BarChart3, MessageCircleHeart, Settings, Table2 } from "lucide-react";
+import { BarChart3, CreditCard, MessageCircleHeart, Settings, Table2 } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 import type { AdminRestaurant } from "@/lib/admin/admin-data";
 
-type AdminSection = "overview" | "tables" | "feedback" | "settings";
+type AdminSection = "overview" | "tables" | "payments" | "feedback" | "settings";
 
 const navItems: Array<{ id: AdminSection; label: string; href: string; icon: typeof BarChart3 }> = [
   { id: "overview", label: "Resumen", href: "/admin", icon: BarChart3 },
   { id: "tables", label: "Mesas", href: "/admin/tables", icon: Table2 },
+  { id: "payments", label: "Pagos", href: "/admin/payments", icon: CreditCard },
   { id: "feedback", label: "Feedback", href: "/admin/feedback", icon: MessageCircleHeart },
   { id: "settings", label: "Configuración", href: "/admin/settings", icon: Settings },
 ];

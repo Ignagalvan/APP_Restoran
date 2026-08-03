@@ -11,6 +11,7 @@ export interface SelectedSplitProduct {
 }
 
 export interface PaymentDraft {
+  accountId: string;
   restaurant: string;
   table: string;
   mode: SplitMode;
@@ -71,6 +72,7 @@ export const createPaymentDraft = ({
   if (!Number.isFinite(amount) || amount <= 0) return null;
 
   return {
+    accountId: account.accountId,
     restaurant: account.restaurant,
     table: account.table,
     mode,

@@ -4,6 +4,7 @@ import { ArrowRight, LoaderCircle } from "lucide-react";
 import { useRef, useState } from "react";
 
 import { PaymentMethodSelector } from "@/components/payment-method-selector";
+import { BankTransferForm } from "@/components/bank-transfer-form";
 import { PaymentSummary } from "@/components/payment-summary";
 import { PaymentUnavailableState } from "@/components/payment-unavailable-state";
 import { TipSelector } from "@/components/tip-selector";
@@ -51,6 +52,8 @@ export function PaymentExperience({ splitPath = "/split" }: { splitPath?: string
     }
   };
 
+  const transferSelected = method === "transfer";
+
   return (
     <div className="payment-content px-5">
       <PaymentSummary draft={draft} tipAmount={tipAmount} totalAmount={totalAmount} />
@@ -64,6 +67,7 @@ export function PaymentExperience({ splitPath = "/split" }: { splitPath?: string
           }}
         />
       </div>
+      {transferSelected && tipSelection ? <div className="mt-6"><BankTransferForm accountId={draft.accountId} amount={totalAmount} /></div> : null}
       <div className="mt-8">
         <TipSelector
           baseAmount={draft.amount}
@@ -80,7 +84,7 @@ export function PaymentExperience({ splitPath = "/split" }: { splitPath?: string
           {errorMessage ?? "No pudimos abrir Mercado Pago. Revisa tus opciones e intenta nuevamente."}
         </p>
       ) : null}
-      <div className="payment-sticky">
+      {!transferSelected ? <div className="payment-sticky">
         <Button
           size="hero"
           className="w-full justify-between disabled:cursor-not-allowed disabled:bg-foreground/12 disabled:text-muted-foreground disabled:opacity-70 disabled:shadow-none"
@@ -101,7 +105,7 @@ export function PaymentExperience({ splitPath = "/split" }: { splitPath?: string
                   ? "Se abrira Mercado Pago Sandbox."
                   : "Ese metodo esta en trabajo."}
         </p>
-      </div>
+      </div> : null}
     </div>
   );
 }

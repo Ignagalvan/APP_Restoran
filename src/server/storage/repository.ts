@@ -31,6 +31,14 @@ export type CreatePaymentInput = {
   provider: string;
   status?: PartialPayment["status"];
   externalTransactionId?: string;
+  proofFileName?: string;
+  proofMimeType?: string;
+  proofDataUrl?: string;
+};
+
+export type ReviewPaymentInput = {
+  paymentId: string;
+  status: "approved" | "rejected";
 };
 
 export type UpdateProviderPaymentInput = {
@@ -64,6 +72,7 @@ export interface RestaurantOsRepository {
     items: AccountItem[];
   }>;
   createPayment(input: CreatePaymentInput): Promise<PartialPayment>;
+  reviewPayment(input: ReviewPaymentInput): Promise<PartialPayment>;
   updateProviderPayment(input: UpdateProviderPaymentInput): Promise<PartialPayment>;
   createFeedback(input: CreateFeedbackInput): Promise<Feedback>;
 }
