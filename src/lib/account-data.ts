@@ -19,10 +19,10 @@ export const accountData: AccountData = {
   status: "open",
   lastUpdated: "23:42 hs",
   items: [
-    { id: "provoleta", name: "Provoleta al hierro", quantity: 1, unitPrice: 9800 },
-    { id: "ravioles", name: "Ravioles de calabaza", quantity: 2, unitPrice: 14500 },
-    { id: "malbec", name: "Malbec copa", quantity: 2, unitPrice: 5800 },
-    { id: "tiramisu", name: "Tiramisu della casa", quantity: 1, unitPrice: 7100 },
+    { id: "empanada-cordero", name: "Empanada de Cordero", quantity: 2, unitPrice: 4200 },
+    { id: "caserecce-cacio-pepe", name: "Caserecce Cacio e Pepe alla Ruota", quantity: 1, unitPrice: 29000 },
+    { id: "milanesa-alma", name: "Milanesa del Alma", quantity: 1, unitPrice: 35000 },
+    { id: "tiramisu-clasico", name: "Tiramisu clasico", quantity: 1, unitPrice: 12000 },
   ],
 };
 
