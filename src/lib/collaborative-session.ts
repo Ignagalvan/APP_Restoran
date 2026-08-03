@@ -47,7 +47,7 @@ export interface CollaborativeOverview {
 }
 
 const productMockState: Record<string, Partial<ProductUnit>> = {
-  "bife-1": { status: "paid", holderLabel: "Una persona", paymentId: "pay_demo_001" },
+  "ravioles-1": { status: "paid", holderLabel: "Una persona", paymentId: "pay_demo_001" },
   "malbec-1": { status: "reserved_by_other", holderLabel: "Otra persona", reservationExpiresAt: "2 min" },
 };
 

@@ -7,7 +7,7 @@ export const demoData: RestaurantOsData = {
     {
       id: "rst_lumbre",
       name: "Alma de Pueblo",
-      slug: "lumbre",
+      slug: "alma-de-pueblo",
       integrationMode: "external",
       integrationStatus: "connected",
       createdAt: now,
