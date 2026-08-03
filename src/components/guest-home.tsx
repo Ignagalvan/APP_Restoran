@@ -1,10 +1,11 @@
 import { ArrowUpRight, ChevronRight, CircleDollarSign, ConciergeBell, Sparkles, Utensils } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { FeedbackHomeAction } from "@/components/feedback-entry-actions";
 import { Button } from "@/components/ui/button";
 
-const restaurant = { name: "Lumbre", table: "Mesa 12", welcome: "Qué alegría recibirte." } as const;
+const restaurant = { name: "Alma de Pueblo", table: "Mesa 12", welcome: "Qué alegría recibirte." } as const;
 
 interface GuestHomeProps {
   tableLabel?: string;
@@ -21,7 +22,7 @@ export function GuestHome({ tableLabel = restaurant.table, basePath = "" }: Gues
       </div>
 
       <header className="relative z-10 flex items-center justify-between">
-        <div className="brand-mark" aria-label={`Logo de ${restaurant.name}`}><span>L</span></div>
+        <div className="brand-mark" aria-label={`Logo de ${restaurant.name}`}><span>AP</span></div>
         <div className="table-badge"><span className="size-1.5 rounded-full bg-status shadow-[0_0_0_4px_var(--status-soft)]" />{tableLabel}</div>
       </header>
 
@@ -29,7 +30,12 @@ export function GuestHome({ tableLabel = restaurant.table, basePath = "" }: Gues
         <div className="mb-6 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           <ConciergeBell className="size-4 text-primary" strokeWidth={1.8} />Bienvenidos a
         </div>
-        <h1 id="restaurant-name" className="font-display text-[clamp(4.4rem,20vw,6rem)] font-medium leading-[0.82] tracking-[-0.065em]">{restaurant.name}</h1>
+        <h1 id="restaurant-name" className="sr-only">{restaurant.name}</h1>
+        <div className="home-brand-logo">
+          <span className="home-brand-stitch" aria-hidden="true" />
+          <span className="home-brand-stitch home-brand-stitch--bottom" aria-hidden="true" />
+          <Image src="/images/brand/alma-de-pueblo-logo-transparent.png" alt="Alma de Pueblo — Trattoría & Almacén" width={534} height={181} priority className="h-auto w-full" />
+        </div>
         <div className="mt-6 flex items-start justify-between gap-5">
           <p className="max-w-[16rem] text-[1.05rem] leading-relaxed text-muted-foreground">{restaurant.welcome}<br />Tu mesa está lista.</p>
           <div className="flex size-12 shrink-0 items-center justify-center rounded-full border border-primary/15 bg-primary/8 text-primary shadow-inner">

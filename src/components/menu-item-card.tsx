@@ -6,11 +6,13 @@ interface MenuItemCardProps { item: MenuItem; onSelect: (item: MenuItem) => void
 
 export function MenuItemCard({ item, onSelect, variant = "entradas" }: MenuItemCardProps) {
   return (
-    <button type="button" className="menu-item-card w-full text-left" data-variant={variant} onClick={() => onSelect(item)} aria-label={`Ver detalle de ${item.name}`}>
-      <div className="menu-item-visual">
-        <Image src={item.image} alt={item.name} fill sizes="(max-width: 640px) 100vw, 28rem" className="object-cover" />
-        {item.tags?.includes("Recomendado") ? <span className="menu-featured">Recomendado</span> : null}
-      </div>
+    <button type="button" className="menu-item-card w-full text-left" data-variant={variant} data-has-image={Boolean(item.image)} onClick={() => onSelect(item)} aria-label={`Ver detalle de ${item.name}`}>
+      {item.image ? (
+        <div className="menu-item-visual">
+          <Image src={item.image} alt={item.name} fill sizes="(max-width: 640px) 100vw, 28rem" className="object-cover" />
+          {item.tags?.includes("Recomendado") ? <span className="menu-featured">Recomendado</span> : null}
+        </div>
+      ) : null}
       <div className="menu-item-content">
         <div className="flex items-start justify-between gap-4">
           <h3 className="text-[1.02rem] font-semibold leading-tight tracking-[-0.015em]">{item.name}</h3>

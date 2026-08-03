@@ -6,7 +6,7 @@ export const demoData: RestaurantOsData = {
   restaurants: [
     {
       id: "rst_lumbre",
-      name: "Lumbre",
+      name: "Alma de Pueblo",
       slug: "lumbre",
       integrationMode: "external",
       integrationStatus: "connected",
@@ -69,7 +69,7 @@ export const demoData: RestaurantOsData = {
       restaurantId: "rst_lumbre",
       accountId: "acc_lumbre_12_active",
       externalItemId: "ext_item_2",
-      name: "Ojo de bife",
+      name: "Ojo de bife con hueso",
       category: "Principales",
       quantity: 1,
       unitPrice: 19200,

@@ -4,7 +4,7 @@ import { AdminSettingsPreview } from "@/components/admin/admin-settings-preview"
 import { AdminShell } from "@/components/admin/admin-shell";
 import { getAdminRestaurant } from "@/lib/admin/admin-data";
 
-export const metadata: Metadata = { title: "Configuración — Panel Lumbre", description: "Acceso mock a configuración básica" };
+export const metadata: Metadata = { title: "Configuración — Alma de Pueblo", description: "Acceso mock a configuración básica" };
 
 export default function AdminSettingsRoute() {
   return (

@@ -14,15 +14,15 @@ export interface AccountData {
 }
 
 export const accountData: AccountData = {
-  restaurant: "Lumbre",
+  restaurant: "Alma de Pueblo",
   table: "Mesa 12",
   status: "open",
   lastUpdated: "23:42 hs",
   items: [
-    { id: "burrata", name: "Burrata ahumada", quantity: 1, unitPrice: 9800 },
-    { id: "bife", name: "Ojo de bife", quantity: 2, unitPrice: 19500 },
-    { id: "malbec", name: "Malbec copa", quantity: 2, unitPrice: 5800 },
-    { id: "cheesecake", name: "Cheesecake cítrico", quantity: 1, unitPrice: 7100 },
+    { id: "panini-alma", name: "Panini del Alma", quantity: 1, unitPrice: 19000 },
+    { id: "ojo-bife", name: "Ojo de bife con hueso", quantity: 2, unitPrice: 34000 },
+    { id: "copa-malbec", name: "Copa Las Perdices Malbec", quantity: 2, unitPrice: 6000 },
+    { id: "tiramisu", name: "Tiramisú clásico", quantity: 1, unitPrice: 12000 },
   ],
 };
 

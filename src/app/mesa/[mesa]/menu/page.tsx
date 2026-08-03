@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { MenuPage } from "@/components/menu-page";
 import { getTableRouteContext } from "@/lib/table-context";
 
-export const metadata: Metadata = { title: "Nuestra carta — Lumbre", description: "Menú digital por QR de mesa" };
+export const metadata: Metadata = { title: "Nuestra carta — Alma de Pueblo", description: "Menú digital por QR de mesa" };
 
 export default async function TableMenuRoute({ params }: { params: Promise<{ mesa: string }> }) {
   const { mesa } = await params;

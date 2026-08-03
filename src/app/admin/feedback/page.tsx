@@ -4,7 +4,7 @@ import { AdminFeedbackView } from "@/components/admin/admin-feedback-view";
 import { AdminShell } from "@/components/admin/admin-shell";
 import { getAdminRestaurant } from "@/lib/admin/admin-data";
 
-export const metadata: Metadata = { title: "Feedback — Panel Lumbre", description: "Feedback mock del panel Restaurant OS" };
+export const metadata: Metadata = { title: "Feedback — Alma de Pueblo", description: "Feedback mock del panel Restaurant OS" };
 
 export default function AdminFeedbackRoute() {
   return (

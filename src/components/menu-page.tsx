@@ -26,9 +26,9 @@ export function MenuPage({ tableLabel = "Mesa 12", homePath = "/", menuPath = "/
           <div className="table-badge"><span className="size-1.5 rounded-full bg-status shadow-[0_0_0_4px_var(--status-soft)]" />{tableLabel}</div>
         </div>
         <div className="mt-7">
-          <p className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary"><UtensilsCrossed className="size-4" strokeWidth={1.8} />Lumbre</p>
-          <h1 className="font-display text-[3rem] font-semibold leading-[.9] tracking-[-0.04em]">Que queres ver?</h1>
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">Elegi una categoria y mira solo lo que te interesa.</p>
+          <p className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-primary"><UtensilsCrossed className="size-4" strokeWidth={1.8} />Alma de Pueblo</p>
+          <h1 className="font-display text-[3rem] font-semibold leading-[.9] tracking-[-0.04em]">Nuestra carta</h1>
+          <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">Elegí una categoría y encontrá tu próximo plato.</p>
         </div>
       </header>
 
