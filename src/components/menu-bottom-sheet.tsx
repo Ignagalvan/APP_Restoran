@@ -1,6 +1,5 @@
 "use client";
 
-import { X } from "lucide-react";
 import Image from "next/image";
 import { useEffect } from "react";
 
@@ -23,7 +22,6 @@ export function MenuBottomSheet({ item, onClose }: MenuBottomSheetProps) {
     <div className="sheet-layer" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
       <section className="menu-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
         <div className="sheet-handle" aria-hidden="true" />
-        <button type="button" className="sheet-close" onClick={onClose} aria-label="Cerrar detalle"><X className="size-5" /></button>
         {item.image ? <div className="sheet-photo"><Image src={item.image} alt={item.name} fill sizes="(max-width: 640px) 100vw, 28rem" className="object-cover" /></div> : null}
         <div className="sheet-content">
           <div className="flex items-start justify-between gap-5"><h2 id="sheet-title" className="font-display text-4xl font-semibold leading-none tracking-[-.035em]">{item.name}</h2><span className="pt-1 text-sm font-semibold text-muted-foreground">{item.price}</span></div>
