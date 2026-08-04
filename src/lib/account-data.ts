@@ -6,7 +6,6 @@ export interface AccountItemData {
 }
 
 export interface AccountData {
-  accountId: string;
   restaurant: string;
   table: string;
   status: "open";
@@ -15,7 +14,6 @@ export interface AccountData {
 }
 
 export const accountData: AccountData = {
-  accountId: "acc_lumbre_12_active",
   restaurant: "Alma de Pueblo",
   table: "Mesa 12",
   status: "open",

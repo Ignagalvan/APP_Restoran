@@ -12,7 +12,7 @@ export function PaymentMethodSelector({ disabled = false, value, onChange }: Pay
   return (
     <fieldset className="space-y-3">
       <legend className="font-display text-3xl font-semibold">Como queres pagar?</legend>
-      <p className="pb-1 text-sm text-muted-foreground">Elegi Mercado Pago o transferencia bancaria.</p>
+      <p className="pb-1 text-sm text-muted-foreground">Elegi un metodo antes de abrir Mercado Pago.</p>
       {paymentMethods.map((method) => {
         const selected = value === method.id;
         const unavailable = !method.enabled;

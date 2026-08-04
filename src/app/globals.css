@@ -303,31 +303,6 @@ a { color: inherit; text-decoration: none; }
 .tip-option[data-selected="true"] .tip-option-check { border-color: rgba(255,255,255,.55); color: var(--primary); background: rgba(255,255,255,.94); animation: split-check-in 220ms cubic-bezier(.22,1,.36,1) both; }
 .payment-sticky { position: fixed; z-index: 30; left: 50%; bottom: 0; width: min(100%,28rem); padding: 1rem 1.25rem max(1rem,env(safe-area-inset-bottom)); background: linear-gradient(180deg,transparent 0,var(--background) 1rem); transform: translateX(-50%); }
 .payment-sticky button:disabled { cursor: not-allowed; }
-.transfer-card { display:grid; gap:.7rem; border:1px solid rgba(76,54,42,.1); border-radius:1.35rem; padding:1rem; background:rgba(255,255,255,.7); box-shadow:0 22px 55px -40px var(--shadow-ink); }
-.transfer-heading { display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(76,54,42,.09); padding-bottom:.8rem; }
-.transfer-heading p,.transfer-detail small { display:block; color:var(--muted-foreground); font-size:.68rem; }
-.transfer-heading strong { display:block; margin-top:.15rem; font-family:var(--font-cormorant),Georgia,serif; font-size:1.8rem; }
-.transfer-heading > span { border-radius:999px; padding:.3rem .55rem; color:var(--primary); background:var(--secondary); font-size:.65rem; font-weight:800; }
-.transfer-detail { display:flex; align-items:center; justify-content:space-between; gap:.75rem; border-radius:.9rem; padding:.65rem .75rem; background:rgba(76,54,42,.045); }
-.transfer-detail strong { display:block; margin-top:.1rem; overflow-wrap:anywhere; font-size:.78rem; }
-.transfer-detail button { display:grid; width:2.25rem; height:2.25rem; flex:none; place-items:center; border-radius:.7rem; color:var(--primary); background:white; }
-.proof-upload { display:flex; cursor:pointer; align-items:center; gap:.7rem; border:1px dashed rgba(76,54,42,.22); border-radius:1rem; padding:.85rem; color:var(--primary); background:rgba(255,255,255,.55); }
-.proof-upload[data-filled="true"] { border-style:solid; border-color:var(--status); }
-.proof-upload span { min-width:0; flex:1; }
-.proof-upload strong,.proof-upload small { display:block; }
-.proof-upload strong { overflow:hidden; color:var(--foreground); font-size:.78rem; text-overflow:ellipsis; white-space:nowrap; }
-.proof-upload small { margin-top:.2rem; color:var(--muted-foreground); font-size:.62rem; }
-.proof-upload input { position:absolute; width:1px; height:1px; opacity:0; }
-.transfer-submit { display:flex; min-height:3.2rem; align-items:center; justify-content:center; gap:.45rem; border-radius:1rem; color:white; background:var(--primary); font-size:.8rem; font-weight:800; }
-.transfer-submit:disabled { cursor:not-allowed; opacity:.42; }
-.transfer-error { color:var(--primary); font-size:.72rem; font-weight:650; }
-.transfer-result { display:grid; justify-items:center; gap:.65rem; border:1px solid rgba(76,54,42,.09); border-radius:1.35rem; padding:2rem 1.2rem; background:rgba(255,255,255,.7); text-align:center; }
-.transfer-result > svg { width:2.8rem; height:2.8rem; color:var(--primary); }
-.transfer-result h3 { font-family:var(--font-cormorant),Georgia,serif; font-size:1.7rem; font-weight:700; }
-.transfer-result p { max-width:19rem; color:var(--muted-foreground); font-size:.78rem; line-height:1.5; }
-.transfer-approved > svg { color:var(--status); }
-.transfer-rejected > svg { color:#a5402a; }
-.transfer-result button { border-radius:.8rem; padding:.65rem .9rem; color:white; background:var(--primary); font-size:.75rem; font-weight:750; }
 .payment-result { margin-top: .5rem; border: 1px solid rgba(255,255,255,.76); border-radius: 1.75rem; padding: 2rem 1.4rem; background: rgba(255,255,255,.74); box-shadow: 0 24px 60px -38px var(--shadow-ink); text-align: center; }
 .payment-success-mark { display: grid; width: 4rem; height: 4rem; margin-inline: auto; place-items: center; border-radius: 999px; color: white; background: var(--status); box-shadow: 0 16px 35px -20px var(--status); animation: split-check-in 240ms cubic-bezier(.22,1,.36,1) both; }
 .feedback-page { padding-bottom: 11rem; }
@@ -376,28 +351,10 @@ a { color: inherit; text-decoration: none; }
 .admin-text-link { min-height: 2rem; display: inline-flex; align-items: center; border-radius: .55rem; padding: 0 .55rem; color: #c9b596; font-size: .74rem; font-weight: 720; transition: background 160ms ease,color 160ms ease; }
 .admin-text-link:hover { background: rgba(201,181,150,.1); color: #f8f3ea; }
 .admin-text-link:focus-visible { outline: 3px solid rgba(201,181,150,.32); outline-offset: 2px; }
-.admin-transfer-empty { display:flex; min-height:8rem; align-items:center; justify-content:center; gap:.5rem; color:#8f877d; font-size:.8rem; }
-.admin-transfer-list { display:grid; gap:.6rem; }
-.admin-transfer-card { display:flex; align-items:center; justify-content:space-between; gap:1rem; border:1px solid rgba(255,255,255,.07); border-radius:.75rem; padding:.8rem; background:rgba(0,0,0,.12); }
-.admin-transfer-card h4 { display:inline; margin-left:.45rem; font-size:.85rem; }
-.admin-transfer-card strong,.admin-transfer-card small { display:block; margin-top:.3rem; }
-.admin-transfer-card strong { font-size:1.1rem; }
-.admin-transfer-card small { color:#8f877d; font-size:.66rem; }
-.admin-transfer-status { border-radius:999px; padding:.22rem .45rem; font-size:.58rem; font-weight:800; }
-.admin-transfer-pending { color:#ffe0a8; background:rgba(230,166,77,.16); }
-.admin-transfer-approved { color:#c6f0d5; background:rgba(80,179,118,.14); }
-.admin-transfer-rejected { color:#ffc2b3; background:rgba(190,75,50,.16); }
-.admin-transfer-actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:.4rem; }
-.admin-transfer-actions a,.admin-transfer-actions button { display:inline-flex; min-height:2.2rem; align-items:center; gap:.35rem; border-radius:.6rem; padding:.45rem .65rem; font-size:.68rem; font-weight:750; }
-.admin-transfer-actions a { color:#f8f3ea; background:rgba(255,255,255,.08); }
-.admin-reject { color:#ffc2b3; background:rgba(190,75,50,.16); }
-.admin-approve { color:#102719; background:#9fddb6; }
 @media (max-width: 48rem) {
   .admin-header { display: block; }
   .admin-data-header { display: none; }
   .admin-table-row,.admin-feedback-row { grid-template-columns: 1fr; gap: .35rem; align-items: start; padding-block: .75rem; }
-  .admin-transfer-card { display:grid; }
-  .admin-transfer-actions { justify-content:flex-start; }
 }
 @keyframes split-panel-in { from { opacity: 0; transform: translateX(8px); } }
 @keyframes split-check-in { from { opacity: 0; transform: scale(.7); } }

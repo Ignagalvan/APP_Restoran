@@ -1,9 +1,9 @@
-import { Banknote, Building2, CreditCard, WalletCards, type LucideIcon } from "lucide-react";
+import { Banknote, CreditCard, WalletCards, type LucideIcon } from "lucide-react";
 
 import type { PaymentDraft } from "@/lib/split-data";
 import { isValidTipSelection, type TipSelection } from "@/lib/tip-data";
 
-export type PaymentMethodId = "mercado-pago" | "transfer" | "card" | "cash";
+export type PaymentMethodId = "mercado-pago" | "card" | "cash";
 
 export interface PaymentMethod {
   id: PaymentMethodId;
@@ -26,7 +26,6 @@ export interface PaymentResultData {
 
 export const paymentMethods: PaymentMethod[] = [
   { id: "mercado-pago", name: "Mercado Pago", description: "Checkout Pro sandbox", icon: WalletCards, enabled: true },
-  { id: "transfer", name: "Transferencia", description: "Transferi por CBU y subi el comprobante", icon: Building2, enabled: true },
   { id: "card", name: "Tarjeta", description: "Credito, debito y wallets se integran despues", icon: CreditCard, enabled: false, badge: "En trabajo" },
   { id: "cash", name: "Efectivo", description: "Aviso al mozo y cierre de mesa pendiente", icon: Banknote, enabled: false, badge: "En trabajo" },
 ];
@@ -35,7 +34,7 @@ export const isEnabledPaymentMethod = (methodId: PaymentMethodId | null) =>
   paymentMethods.some((method) => method.id === methodId && method.enabled);
 
 export function isValidPaymentDraft(draft: PaymentDraft | null): draft is PaymentDraft {
-  if (!draft || !draft.accountId.trim() || !draft.restaurant.trim() || !draft.table.trim()) return false;
+  if (!draft || !draft.restaurant.trim() || !draft.table.trim()) return false;
   if (!Number.isFinite(draft.amount) || draft.amount <= 0) return false;
   if (!Number.isFinite(draft.unassignedBalance) || draft.unassignedBalance < 0) return false;
   if (draft.mode === "equal" || draft.mode === "full") return true;

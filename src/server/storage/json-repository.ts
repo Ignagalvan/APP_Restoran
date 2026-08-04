@@ -12,7 +12,6 @@ import type {
   CreateFeedbackInput,
   CreatePaymentInput,
   RestaurantOsRepository,
-  ReviewPaymentInput,
   SyncExternalTicketInput,
   UpdateProviderPaymentInput,
 } from "./repository";
@@ -186,9 +185,6 @@ export class JsonRestaurantOsRepository implements RestaurantOsRepository {
       provider: input.provider,
       status: input.status ?? "pending",
       externalTransactionId: input.externalTransactionId,
-      proofFileName: input.proofFileName,
-      proofMimeType: input.proofMimeType,
-      proofDataUrl: input.proofDataUrl,
       createdAt: now(),
       confirmedAt: input.status === "approved" ? now() : undefined,
     };
@@ -199,28 +195,6 @@ export class JsonRestaurantOsRepository implements RestaurantOsRepository {
       account.paidTotal += payment.amount;
       account.status = calculateAccountStatus(account.total, account.paidTotal);
     }
-
-    await writeStore(data);
-    return payment;
-  }
-
-  async reviewPayment(input: ReviewPaymentInput) {
-    const data = await readStore();
-    const payment = data.payments.find((candidate) => candidate.id === input.paymentId);
-    if (!payment) throw new Error("PAYMENT_NOT_FOUND");
-    if (payment.provider !== "bank_transfer") throw new Error("PAYMENT_NOT_REVIEWABLE");
-
-    const account = data.accounts.find((candidate) => candidate.id === payment.accountId);
-    if (!account) throw new Error("ACCOUNT_NOT_FOUND");
-
-    const wasApproved = payment.status === "approved";
-    payment.status = input.status;
-    payment.reviewedAt = now();
-    payment.confirmedAt = input.status === "approved" ? now() : undefined;
-
-    if (!wasApproved && input.status === "approved") account.paidTotal += payment.amount;
-    if (wasApproved && input.status === "rejected") account.paidTotal = Math.max(0, account.paidTotal - payment.amount);
-    account.status = calculateAccountStatus(account.total, account.paidTotal);
 
     await writeStore(data);
     return payment;
