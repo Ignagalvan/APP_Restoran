@@ -1,10 +1,11 @@
-import { ArrowUpRight, ChevronRight, CircleDollarSign, ConciergeBell, Leaf, Utensils } from "lucide-react";
+import { ArrowUpRight, ChevronRight, CircleDollarSign, ConciergeBell, Sparkles, Utensils } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { FeedbackHomeAction } from "@/components/feedback-entry-actions";
 import { Button } from "@/components/ui/button";
 
-const restaurant = { name: "Alma de Pueblo", table: "Mesa 12", welcome: "Cocina italiana de barrio." } as const;
+const restaurant = { name: "Alma de Pueblo", table: "Mesa 12", welcome: "Qué alegría recibirte." } as const;
 
 interface GuestHomeProps {
   tableLabel?: string;
@@ -13,9 +14,11 @@ interface GuestHomeProps {
 
 export function GuestHome({ tableLabel = restaurant.table, basePath = "" }: GuestHomeProps) {
   return (
-    <main className="relative mx-auto flex min-h-svh w-full max-w-md flex-col overflow-hidden bg-background px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))] text-foreground sm:min-h-[52rem] sm:rounded-[1.65rem] sm:border sm:border-foreground/10 sm:shadow-[0_35px_100px_-55px_var(--shadow-ink)]">
+    <main className="relative mx-auto flex min-h-svh w-full max-w-md flex-col overflow-hidden bg-background px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))] text-foreground sm:min-h-[52rem] sm:rounded-[2.25rem] sm:border sm:border-white/50 sm:shadow-[0_35px_100px_-45px_var(--shadow-ink)]">
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <div className="grain absolute inset-0 opacity-[0.04]" />
+        <div className="absolute -right-20 -top-24 size-72 rounded-full bg-glow-primary blur-3xl" />
+        <div className="absolute -left-24 top-[38%] size-64 rounded-full bg-glow-gold blur-3xl" />
+        <div className="grain absolute inset-0 opacity-[0.035]" />
       </div>
 
       <header className="relative z-10 flex items-center justify-between">
@@ -25,13 +28,18 @@ export function GuestHome({ tableLabel = restaurant.table, basePath = "" }: Gues
 
       <section className="relative z-10 flex flex-1 flex-col justify-center py-8" aria-labelledby="restaurant-name">
         <div className="mb-6 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-          <ConciergeBell className="size-4 text-primary" strokeWidth={1.8} />Benvenuti
+          <ConciergeBell className="size-4 text-primary" strokeWidth={1.8} />Bienvenidos a
         </div>
-        <h1 id="restaurant-name" className="font-display text-[clamp(3.8rem,17vw,5.4rem)] font-semibold leading-[0.86] tracking-[-0.055em]">{restaurant.name}</h1>
+        <h1 id="restaurant-name" className="sr-only">{restaurant.name}</h1>
+        <div className="home-brand-logo">
+          <span className="home-brand-stitch" aria-hidden="true" />
+          <span className="home-brand-stitch home-brand-stitch--bottom" aria-hidden="true" />
+          <Image src="/images/brand/alma-de-pueblo-logo-transparent.png" alt="Alma de Pueblo — Trattoría & Almacén" width={534} height={181} priority className="h-auto w-full" />
+        </div>
         <div className="mt-6 flex items-start justify-between gap-5">
-          <p className="max-w-[17rem] text-[1.02rem] leading-relaxed text-muted-foreground">{restaurant.welcome}<br />Tu mesa esta lista.</p>
+          <p className="max-w-[16rem] text-[1.05rem] leading-relaxed text-muted-foreground">{restaurant.welcome}<br />Tu mesa está lista.</p>
           <div className="flex size-12 shrink-0 items-center justify-center rounded-full border border-primary/15 bg-primary/8 text-primary shadow-inner">
-            <Leaf className="size-5" strokeWidth={1.7} />
+            <Sparkles className="size-5" strokeWidth={1.7} />
           </div>
         </div>
       </section>
@@ -40,7 +48,7 @@ export function GuestHome({ tableLabel = restaurant.table, basePath = "" }: Gues
         <Button size="hero" className="group w-full justify-start gap-4" asChild>
           <Link href={`${basePath}/menu`}>
             <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-white/14 shadow-inner"><Utensils className="size-5" strokeWidth={1.8} /></span>
-            <span className="flex-1 text-left"><span className="block text-[1.05rem] font-semibold">Ver menu</span><span className="mt-0.5 block text-xs font-normal text-primary-foreground/72">Pastas, cantina y clasicos</span></span>
+            <span className="flex-1 text-left"><span className="block text-[1.05rem] font-semibold">Ver Menú</span><span className="mt-0.5 block text-xs font-normal text-primary-foreground/72">Descubrí nuestra propuesta</span></span>
             <ArrowUpRight className="size-5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" strokeWidth={1.8} />
           </Link>
         </Button>
@@ -49,7 +57,7 @@ export function GuestHome({ tableLabel = restaurant.table, basePath = "" }: Gues
           <Button variant="glass" size="tile" className="group flex-col items-start justify-between" asChild>
             <Link href={`${basePath}/account`}>
               <span className="flex w-full items-start justify-between"><span className="grid size-10 place-items-center rounded-2xl bg-secondary text-primary shadow-sm"><CircleDollarSign className="size-5" strokeWidth={1.8} /></span><ChevronRight className="size-4 text-muted-foreground/55 transition-transform group-hover:translate-x-0.5" /></span>
-              <span className="w-full text-left text-sm font-semibold">Ver consumo</span>
+              <span className="w-full text-left text-sm font-semibold">Ver Consumo</span>
             </Link>
           </Button>
           <FeedbackHomeAction tableLabel={tableLabel} feedbackPath={`${basePath}/feedback`} />

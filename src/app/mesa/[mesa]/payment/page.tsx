@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { PaymentPage } from "@/components/payment-page";
 
-export const metadata: Metadata = { title: "Tu pago - Alma de Pueblo", description: "Resumen y checkout sandbox por QR de mesa" };
+export const metadata: Metadata = { title: "Tu pago — Alma de Pueblo", description: "Resumen y checkout sandbox por QR de mesa" };
 
 export default async function TablePaymentRoute({ params }: { params: Promise<{ mesa: string }> }) {
   const { mesa } = await params;

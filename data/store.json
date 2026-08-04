@@ -2,7 +2,7 @@
   "restaurants": [
     {
       "id": "rst_lumbre",
-      "name": "Lumbre",
+      "name": "Alma de Pueblo",
       "slug": "lumbre",
       "integrationMode": "external",
       "integrationStatus": "connected",
@@ -38,10 +38,10 @@
       "restaurantId": "rst_lumbre",
       "sessionId": "ses_lumbre_12_active",
       "externalAccountId": "ticket-demo-002",
-      "subtotal": 67500,
+      "subtotal": 111000,
       "discounts": 0,
       "tip": 0,
-      "total": 67500,
+      "total": 111000,
       "paidTotal": 0,
       "status": "open",
       "lastSyncedAt": "2026-07-08T17:39:56.664Z"
@@ -53,11 +53,11 @@
       "restaurantId": "rst_lumbre",
       "accountId": "acc_lumbre_12_active",
       "externalItemId": "burrata",
-      "name": "Burrata ahumada",
+      "name": "Panini del Alma",
       "category": "Entradas",
       "quantity": 1,
-      "unitPrice": 9800,
-      "total": 9800,
+      "unitPrice": 19000,
+      "total": 19000,
       "status": "active"
     },
     {
@@ -65,11 +65,11 @@
       "restaurantId": "rst_lumbre",
       "accountId": "acc_lumbre_12_active",
       "externalItemId": "bife",
-      "name": "Ojo de bife",
+      "name": "Ojo de bife con hueso",
       "category": "Principales",
       "quantity": 2,
-      "unitPrice": 19500,
-      "total": 39000,
+      "unitPrice": 34000,
+      "total": 68000,
       "status": "active"
     },
     {
@@ -77,11 +77,11 @@
       "restaurantId": "rst_lumbre",
       "accountId": "acc_lumbre_12_active",
       "externalItemId": "malbec",
-      "name": "Malbec copa",
+      "name": "Copa Las Perdices Malbec",
       "category": "Bebidas",
       "quantity": 2,
-      "unitPrice": 5800,
-      "total": 11600,
+      "unitPrice": 6000,
+      "total": 12000,
       "status": "active"
     },
     {
@@ -89,11 +89,11 @@
       "restaurantId": "rst_lumbre",
       "accountId": "acc_lumbre_12_active",
       "externalItemId": "cheesecake",
-      "name": "Cheesecake citrico",
+      "name": "Tiramisú clásico",
       "category": "Postres",
       "quantity": 1,
-      "unitPrice": 7100,
-      "total": 7100,
+      "unitPrice": 12000,
+      "total": 12000,
       "status": "active"
     }
   ],
