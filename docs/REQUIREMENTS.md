@@ -265,7 +265,7 @@ El módulo solo admite correcciones de errores o mejoras críticas de usabilidad
 - Mesas mock configurables.
 - Estado local de cambios y guardado simulado.
 
-**Estado inicial:** Configuración mock precargada para Lumbre.
+**Estado inicial:** Configuración mock precargada para Alma de Pueblo.
 
 **No se implementa todavía:**
 

@@ -6,7 +6,7 @@ Implementado, validado y congelado para V1.
 
 ## Objetivo y alcance V1
 
-Permitir que el comensal deje una valoración breve sobre su experiencia en Lumbre, mediante una simulación local clara y sin registro.
+Permitir que el comensal deje una valoración breve sobre su experiencia en Alma de Pueblo, mediante una simulación local clara y sin registro.
 
 La V1 incluye valoración, comentario opcional, envío simulado y confirmación. No incluye persistencia, datos personales, respuestas del restaurante, notificaciones, clasificación automática ni integración con Google Reviews.
 

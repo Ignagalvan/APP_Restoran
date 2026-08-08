@@ -82,6 +82,26 @@ export class JsonRestaurantOsRepository implements RestaurantOsRepository {
     return data.accounts.find((account) => account.sessionId === sessionId) ?? null;
   }
 
+  async getAccountItems(accountId: string) {
+    const data = await readStore();
+    return data.accountItems.filter(
+      (item) => item.accountId === accountId && item.status === "active",
+    );
+  }
+
+  async setAccountPaymentEnabled(accountId: string, enabled: boolean) {
+    const data = await readStore();
+    const account = data.accounts.find((candidate) => candidate.id === accountId);
+
+    if (!account) {
+      throw new Error("ACCOUNT_NOT_FOUND");
+    }
+
+    account.paymentEnabled = enabled;
+    await writeStore(data);
+    return account;
+  }
+
   async syncExternalTicket(input: SyncExternalTicketInput) {
     const data = await readStore();
     const table = data.tables.find(
@@ -148,6 +168,7 @@ export class JsonRestaurantOsRepository implements RestaurantOsRepository {
         total: subtotal,
         paidTotal: 0,
         status: "open",
+        paymentEnabled: false,
         lastSyncedAt: now(),
       };
       data.accounts.push(account);

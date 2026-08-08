@@ -57,6 +57,8 @@ export interface RestaurantOsRepository {
   findTableByQrCode(qrCode: string): Promise<RestaurantTable | null>;
   getActiveSessionByTable(tableId: string): Promise<TableSession | null>;
   getAccountBySession(sessionId: string): Promise<Account | null>;
+  getAccountItems(accountId: string): Promise<AccountItem[]>;
+  setAccountPaymentEnabled(accountId: string, enabled: boolean): Promise<Account>;
   syncExternalTicket(input: SyncExternalTicketInput): Promise<{
     table: RestaurantTable;
     session: TableSession;

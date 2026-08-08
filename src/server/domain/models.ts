@@ -52,6 +52,7 @@ export type Account = {
   total: number;
   paidTotal: number;
   status: AccountStatus;
+  paymentEnabled: boolean;
   lastSyncedAt: string;
 };
 

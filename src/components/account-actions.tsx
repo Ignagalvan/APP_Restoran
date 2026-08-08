@@ -6,10 +6,10 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { usePaymentFlow } from "@/components/payment-flow-context";
-import { accountData } from "@/lib/account-data";
+import { accountData, type AccountData } from "@/lib/account-data";
 import { createPaymentDraft } from "@/lib/split-data";
 
-export function AccountActions({ splitPath = "/split", paymentPath = "/payment" }: { splitPath?: string; paymentPath?: string }) {
+export function AccountActions({ account = accountData, splitPath = "/split", paymentPath = "/payment" }: { account?: AccountData; splitPath?: string; paymentPath?: string }) {
   const router = useRouter();
   const { setDraft } = usePaymentFlow();
   const [message, setMessage] = useState<string | null>(null);
@@ -30,7 +30,7 @@ export function AccountActions({ splitPath = "/split", paymentPath = "/payment" 
 
   const prepareFullPayment = () => {
     const draft = createPaymentDraft({
-      account: accountData,
+      account,
       mode: "full",
       selectedQuantities: {},
       people: 1,
@@ -58,10 +58,16 @@ export function AccountActions({ splitPath = "/split", paymentPath = "/payment" 
           <ArrowRight className="size-4" />
         </span>
       </Link>
-      <button type="button" className="account-primary-action" onClick={prepareFullPayment}>
-        <span>Pagar cuenta completa</span>
-        <ArrowRight className="size-5" />
-      </button>
+      {account.paymentEnabled ? (
+        <button type="button" className="account-primary-action" onClick={prepareFullPayment}>
+          <span>Pagar cuenta completa</span>
+          <ArrowRight className="size-5" />
+        </button>
+      ) : (
+        <p className="account-payment-locked" role="status">
+          Pedile a tu mozo que habilite el pago para continuar.
+        </p>
+      )}
       <p className="account-toast" role="status" aria-live="polite" data-visible={Boolean(message)}>
         {message ?? ""}
       </p>

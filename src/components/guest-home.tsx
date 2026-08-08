@@ -60,7 +60,7 @@ export function GuestHome({ tableLabel = restaurant.table, basePath = "" }: Gues
               <span className="w-full text-left text-sm font-semibold">Ver Consumo</span>
             </Link>
           </Button>
-          <FeedbackHomeAction tableLabel={tableLabel} feedbackPath={`${basePath}/feedback`} />
+          <FeedbackHomeAction />
         </div>
       </nav>
     </main>

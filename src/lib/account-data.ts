@@ -11,6 +11,7 @@ export interface AccountData {
   status: "open";
   lastUpdated: string;
   items: AccountItemData[];
+  paymentEnabled: boolean;
 }
 
 export const accountData: AccountData = {
@@ -18,6 +19,7 @@ export const accountData: AccountData = {
   table: "Mesa 12",
   status: "open",
   lastUpdated: "23:42 hs",
+  paymentEnabled: true,
   items: [
     { id: "panini-alma", name: "Panini del Alma", quantity: 1, unitPrice: 19000 },
     { id: "ojo-bife", name: "Ojo de bife con hueso", quantity: 2, unitPrice: 34000 },
