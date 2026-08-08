@@ -19,7 +19,7 @@ export function FeedbackSuccessState({ result, homePath = "/" }: { result: Feedb
         <p className="mt-1 text-2xl font-semibold" aria-label={`${result.rating} de 5 estrellas`}>{"★".repeat(result.rating)}<span className="text-muted-foreground/30">{"★".repeat(5 - result.rating)}</span></p>
       </div>
       <Button asChild size="hero" className="mt-7 w-full justify-between text-primary-foreground!">
-        <Link href={googleReviewUrl}><span>Valorar en Google</span><MapPin className="size-5" /></Link>
+        <Link href={googleReviewUrl} target="_blank" rel="noopener noreferrer"><span>Valorar en Google</span><MapPin className="size-5" /></Link>
       </Button>
       <Link href={homePath} className="mt-4 inline-block text-xs font-semibold text-muted-foreground">Volver al inicio</Link>
     </section>

@@ -120,4 +120,4 @@
 2. UX-004 a UX-009.
 3. Regresión visual y funcional completa.
 4. UX-010 a UX-013 solo si no comprometen la estabilidad del RC.
-5. Validación final: teclado, lector de pantalla, zoom 200%, movimiento reducido, viewports 320–430 px, tablet/escritorio, `npm run lint` y `npm run build`.
+5. Validación final: teclado, lector de pantalla, zoom 200%, movimiento reducido, viewports 320–430 px, tablet/escritorio, `pnpm lint` y `pnpm build`.
