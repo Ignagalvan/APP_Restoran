@@ -219,6 +219,6 @@ No quedan decisiones funcionales bloqueantes para implementar RF-007 dentro de R
 - Total derivado, no editable.
 - Actualización accesible del total.
 - Controles de método y propina deshabilitados durante procesamiento.
-- Validación con `npm run lint`, `npm run build` y recorrido funcional mobile sin errores de consola.
+- Validación con `pnpm lint`, `pnpm build` y recorrido funcional mobile sin errores de consola.
 
 El módulo queda congelado para la V1. Solo se aceptarán correcciones de errores o mejoras críticas de usabilidad.

@@ -264,4 +264,4 @@ Mercado Pago, pasarelas, tarjetas o credenciales reales, QR de pago, CVU, alias,
 - Procesamiento breve y resultado simulado.
 - Estado no disponible para acceso directo o recarga.
 - Enlace de salida hacia `/feedback` sin implementar RF-008.
-- Validación con `npm run lint`, `npm run build` y recorrido funcional mobile sin errores de consola.
+- Validación con `pnpm lint`, `pnpm build` y recorrido funcional mobile sin errores de consola.

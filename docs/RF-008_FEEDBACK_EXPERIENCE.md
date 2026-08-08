@@ -244,7 +244,7 @@ Quedan explícitamente fuera de V1 y requerirán una decisión futura antes de i
 - Estado de éxito.
 - Estado de error simulado recuperable.
 - Estado de contexto no disponible.
-- Validación con `npm run lint` y `npm run build`.
+- Validación con `pnpm lint` y `pnpm build`.
 
 El módulo queda congelado para la V1. Solo se aceptarán correcciones de errores o mejoras críticas de usabilidad.
 

@@ -332,7 +332,7 @@ La seguridad para pagos reales queda pendiente de definición técnica. La V1 so
 5. Panel Restaurante básico.
 6. Configuración básica.
 7. Revisión general.
-8. Auditoría con `npm run lint`, `npm run build` y React Doctor si está disponible.
+8. Auditoría con `pnpm lint`, `pnpm build` y React Doctor si está disponible.
 
 No se comienza un módulo nuevo hasta cerrar la validación y documentación del módulo anterior.
 
@@ -340,8 +340,8 @@ No se comienza un módulo nuevo hasta cerrar la validación y documentación del
 
 Cada módulo debe completar:
 
-- `npm run lint`.
-- `npm run build`.
+- `pnpm lint`.
+- `pnpm build`.
 - Revisión visual.
 - Revisión funcional.
 - Actualización documental.

@@ -89,7 +89,7 @@ Un módulo está terminado para V1 cuando:
 - Cumple alcance y exclusiones documentadas.
 - Usa datos mock separados y no incorpora integraciones no aprobadas.
 - Mantiene coherencia visual, accesibilidad básica y mobile first.
-- Supera `npm run lint` y `npm run build`.
+- Supera `pnpm lint` y `pnpm build`.
 - Supera revisión visual y funcional.
 - Actualiza únicamente la documentación necesaria.
 - Queda implementado, validado y congelado para V1.

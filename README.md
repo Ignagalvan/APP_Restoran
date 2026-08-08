@@ -68,7 +68,7 @@ Mas adelante, el producto puede crecer hacia un sistema propio completo para res
 ```bash
 git clone https://github.com/Ignagalvan/APP_Restoran.git
 cd APP_Restoran
-npm install
+pnpm install
 ```
 
 Para trabajar sobre el avance de Alma de Pueblo:
@@ -90,16 +90,16 @@ Tambien existe `.env.example` como referencia.
 ## Comandos
 
 ```bash
-npm run dev
-npm run lint
-npm run build
-npm run start
+pnpm dev
+pnpm lint
+pnpm build
+pnpm start
 ```
 
 Si el puerto 3000 esta ocupado:
 
 ```bash
-npm run dev -- -p 3001
+pnpm dev -p 3001
 ```
 
 ## Rutas utiles
