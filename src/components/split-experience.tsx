@@ -40,9 +40,18 @@ export function SplitExperience({ account = accountData, paymentPath = "/payment
   const selectedPart = equalParts.find((part) => part.id === selectedPartId && part.status === "selected_by_me") ?? null;
   const overview = mode === "products" ? getProductOverview(account, productGroups) : getEqualOverview(accountTotal, equalParts);
   const draft = createPaymentDraft({ account, mode, selectedQuantities, people, fixedAmount: selectedPart?.amount });
-  const ready = mode === "products" ? selectedUnits.length > 0 && Boolean(draft) : confirmedPeople === people && Boolean(selectedPart) && Boolean(draft);
+  const selectionReady = mode === "products" ? selectedUnits.length > 0 && Boolean(draft) : confirmedPeople === people && Boolean(selectedPart) && Boolean(draft);
+  const ready = selectionReady && account.paymentEnabled;
   const amount = mode === "products" ? overview.selectedAmount : selectedPart?.amount ?? 0;
-  const statusText = ready ? "Seleccion lista" : mode === "products" ? "Elegi al menos una unidad disponible" : confirmedPeople === people ? "Toma una parte disponible" : "Confirma la cantidad de personas";
+  const statusText = !account.paymentEnabled
+    ? "Pedile a tu mozo que habilite el pago"
+    : selectionReady
+      ? "Seleccion lista"
+      : mode === "products"
+        ? "Elegi al menos una unidad disponible"
+        : confirmedPeople === people
+          ? "Toma una parte disponible"
+          : "Confirma la cantidad de personas";
 
   const toggleUnit = (unitId: string) => {
     const unit = productGroups.flatMap((group) => group.units).find((candidate) => candidate.id === unitId);

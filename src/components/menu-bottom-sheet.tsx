@@ -1,5 +1,6 @@
 "use client";
 
+import { Leaf, WheatOff } from "lucide-react";
 import Image from "next/image";
 import { useEffect } from "react";
 
@@ -26,7 +27,15 @@ export function MenuBottomSheet({ item, onClose }: MenuBottomSheetProps) {
         <div className="sheet-content">
           <div className="flex items-start justify-between gap-5"><h2 id="sheet-title" className="font-display text-4xl font-semibold leading-none tracking-[-.035em]">{item.name}</h2><span className="pt-1 text-sm font-semibold text-muted-foreground">{item.price}</span></div>
           {item.description ? <p className="mt-4 leading-relaxed text-muted-foreground">{item.description}</p> : null}
-          {item.tags?.length ? <ul className="mt-4 flex flex-wrap gap-2">{item.tags.map((tag) => <li key={tag} className="menu-tag">{tag}</li>)}</ul> : null}
+          {item.tags?.includes("Vegetariano") || item.tags?.includes("Sin TACC") ? (
+            <div className="menu-dietary-icons mt-3">
+              {item.tags.includes("Vegetariano") ? <span className="menu-dietary-icon" data-kind="vegetariano" title="Vegetariano" aria-label="Vegetariano"><Leaf className="size-4" strokeWidth={2} /></span> : null}
+              {item.tags.includes("Sin TACC") ? <span className="menu-dietary-icon" data-kind="sin-tacc" title="Apto para celíacos (Sin TACC)" aria-label="Apto para celíacos (Sin TACC)"><WheatOff className="size-4" strokeWidth={2} /></span> : null}
+            </div>
+          ) : null}
+          {item.tags?.some((tag) => tag !== "Vegetariano" && tag !== "Sin TACC") ? (
+            <ul className="mt-3 flex flex-wrap gap-2">{item.tags.filter((tag) => tag !== "Vegetariano" && tag !== "Sin TACC").map((tag) => <li key={tag} className="menu-tag">{tag}</li>)}</ul>
+          ) : null}
           {item.ingredients?.length ? <div className="mt-6 border-t border-foreground/10 pt-5"><h3 className="text-xs font-bold uppercase tracking-[.14em] text-muted-foreground">Ingredientes</h3><p className="mt-2 text-sm leading-relaxed">{item.ingredients.join(" · ")}</p></div> : null}
           {item.pairing ? <div className="mt-5 rounded-2xl bg-secondary/75 p-4"><h3 className="text-xs font-bold uppercase tracking-[.14em] text-primary">Maridaje sugerido</h3><p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.pairing}</p></div> : null}
           {item.optionGroups?.map((group) => (

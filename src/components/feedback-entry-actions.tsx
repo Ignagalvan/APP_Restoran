@@ -6,21 +6,16 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useFeedbackFlow } from "@/components/feedback-flow-context";
 import { accountData } from "@/lib/account-data";
+import { getGoogleReviewUrl } from "@/lib/google-review";
 import type { PaymentResultData } from "@/lib/payment-data";
 
-interface FeedbackHomeActionProps {
-  tableLabel?: string;
-  feedbackPath?: string;
-}
-
-export function FeedbackHomeAction({ tableLabel = accountData.table, feedbackPath = "/feedback" }: FeedbackHomeActionProps) {
-  const { setContext } = useFeedbackFlow();
+export function FeedbackHomeAction() {
   return (
     <Button variant="glass" size="tile" className="group flex-col items-start justify-between" asChild>
-      <Link href={feedbackPath} onClick={() => setContext({ restaurant: accountData.restaurant, table: tableLabel, source: "home" })}>
+      <a href={getGoogleReviewUrl()} target="_blank" rel="noopener noreferrer">
         <span className="flex w-full items-start justify-between"><span className="grid size-10 place-items-center rounded-2xl bg-secondary text-primary shadow-sm"><Star className="size-5" strokeWidth={1.8} /></span><ChevronRight className="size-4 text-muted-foreground/55 transition-transform group-hover:translate-x-0.5" /></span>
         <span className="w-full text-left text-sm font-semibold">Mi Experiencia</span>
-      </Link>
+      </a>
     </Button>
   );
 }

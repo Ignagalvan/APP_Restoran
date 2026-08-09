@@ -22,7 +22,7 @@ export function AccountExperience({ account = accountData, splitPath = "/split",
     <>
       <div className="relative space-y-4 px-5 pb-[max(2rem,env(safe-area-inset-bottom))]">
         {hasConsumption ? <AccountSummary account={account} onSelectItem={selectItem} /> : <EmptyAccountState />}
-        <AccountActions splitPath={splitPath} paymentPath={paymentPath} />
+        <AccountActions account={account} splitPath={splitPath} paymentPath={paymentPath} />
         <p className="px-5 pb-4 text-center text-xs leading-relaxed text-muted-foreground">Los importes mostrados corresponden al consumo registrado de la mesa.</p>
       </div>
       <MenuBottomSheet item={selectedItem} onClose={closeSheet} />

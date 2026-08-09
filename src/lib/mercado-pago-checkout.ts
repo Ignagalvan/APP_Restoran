@@ -7,7 +7,7 @@ export type StartMercadoPagoCheckoutInput = {
 };
 
 export async function startMercadoPagoCheckout({
-  accountId = "acc_lumbre_12_active",
+  accountId = "acc_alma_de_pueblo_12_active",
   amount,
   baseAmount,
   tipAmount = 0,

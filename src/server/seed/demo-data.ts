@@ -5,7 +5,7 @@ const now = new Date().toISOString();
 export const demoData: RestaurantOsData = {
   restaurants: [
     {
-      id: "rst_lumbre",
+      id: "rst_alma_de_pueblo",
       name: "Alma de Pueblo",
       slug: "alma-de-pueblo",
       integrationMode: "external",
@@ -16,11 +16,11 @@ export const demoData: RestaurantOsData = {
   ],
   tables: [
     {
-      id: "tbl_lumbre_12",
-      restaurantId: "rst_lumbre",
+      id: "tbl_alma_de_pueblo_12",
+      restaurantId: "rst_alma_de_pueblo",
       externalTableId: "mesa-12",
       label: "Mesa 12",
-      qrCode: "lumbre-mesa-12",
+      qrCode: "alma-de-pueblo-mesa-12",
       status: "occupied",
       createdAt: now,
       updatedAt: now,
@@ -28,9 +28,9 @@ export const demoData: RestaurantOsData = {
   ],
   sessions: [
     {
-      id: "ses_lumbre_12_active",
-      restaurantId: "rst_lumbre",
-      tableId: "tbl_lumbre_12",
+      id: "ses_alma_de_pueblo_12_active",
+      restaurantId: "rst_alma_de_pueblo",
+      tableId: "tbl_alma_de_pueblo_12",
       externalTicketId: "ticket-demo-001",
       status: "active",
       openedAt: now,
@@ -38,9 +38,9 @@ export const demoData: RestaurantOsData = {
   ],
   accounts: [
     {
-      id: "acc_lumbre_12_active",
-      restaurantId: "rst_lumbre",
-      sessionId: "ses_lumbre_12_active",
+      id: "acc_alma_de_pueblo_12_active",
+      restaurantId: "rst_alma_de_pueblo",
+      sessionId: "ses_alma_de_pueblo_12_active",
       externalAccountId: "ticket-demo-001",
       subtotal: 27600,
       discounts: 0,
@@ -48,14 +48,15 @@ export const demoData: RestaurantOsData = {
       total: 27600,
       paidTotal: 0,
       status: "open",
+      paymentEnabled: false,
       lastSyncedAt: now,
     },
   ],
   accountItems: [
     {
       id: "itm_demo_1",
-      restaurantId: "rst_lumbre",
-      accountId: "acc_lumbre_12_active",
+      restaurantId: "rst_alma_de_pueblo",
+      accountId: "acc_alma_de_pueblo_12_active",
       externalItemId: "ext_item_1",
       name: "Empanadas de osobuco",
       category: "Entradas",
@@ -66,8 +67,8 @@ export const demoData: RestaurantOsData = {
     },
     {
       id: "itm_demo_2",
-      restaurantId: "rst_lumbre",
-      accountId: "acc_lumbre_12_active",
+      restaurantId: "rst_alma_de_pueblo",
+      accountId: "acc_alma_de_pueblo_12_active",
       externalItemId: "ext_item_2",
       name: "Ojo de bife con hueso",
       category: "Principales",
@@ -82,11 +83,11 @@ export const demoData: RestaurantOsData = {
   feedback: [],
   integrations: [
     {
-      id: "int_lumbre_external",
-      restaurantId: "rst_lumbre",
+      id: "int_alma_de_pueblo_external",
+      restaurantId: "rst_alma_de_pueblo",
       provider: "external_pos_demo",
       status: "connected",
-      endpoint: "https://example.com/pos/lumbre",
+      endpoint: "https://example.com/pos/alma-de-pueblo",
       createdAt: now,
       updatedAt: now,
     },
