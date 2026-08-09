@@ -1,3 +1,4 @@
+import { Leaf, WheatOff } from "lucide-react";
 import Image from "next/image";
 
 import type { MenuCategoryAccent, MenuItem } from "@/lib/menu-data";
@@ -19,9 +20,15 @@ export function MenuItemCard({ item, onSelect, variant = "entradas" }: MenuItemC
           <p className="shrink-0 text-xs font-semibold text-muted-foreground">{item.price}</p>
         </div>
         {item.description ? <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p> : null}
-        {item.tags?.length ? (
+        {item.tags?.includes("Vegetariano") || item.tags?.includes("Sin TACC") ? (
+          <div className="menu-dietary-icons mt-2">
+            {item.tags.includes("Vegetariano") ? <span className="menu-dietary-icon" data-kind="vegetariano" title="Vegetariano" aria-label="Vegetariano"><Leaf className="size-4" strokeWidth={2} /></span> : null}
+            {item.tags.includes("Sin TACC") ? <span className="menu-dietary-icon" data-kind="sin-tacc" title="Apto para celíacos (Sin TACC)" aria-label="Apto para celíacos (Sin TACC)"><WheatOff className="size-4" strokeWidth={2} /></span> : null}
+          </div>
+        ) : null}
+        {item.tags?.some((tag) => tag !== "Recomendado" && tag !== "Vegetariano" && tag !== "Sin TACC") ? (
           <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Características del plato">
-            {item.tags.filter((tag) => tag !== "Recomendado").map((tag) => <li key={tag} className="menu-tag">{tag}</li>)}
+            {item.tags.filter((tag) => tag !== "Recomendado" && tag !== "Vegetariano" && tag !== "Sin TACC").map((tag) => <li key={tag} className="menu-tag">{tag}</li>)}
           </ul>
         ) : null}
       </div>
