@@ -245,8 +245,8 @@ export const menuCategories: MenuCategory[] = [
     shortDescription: "Para los más chicos.",
     accent: "ninos",
     items: [
-      { id: "milanesa-bambino", name: "Milanesa bambino", description: "Con papas fritas o puré, huevo frito y ketchup.", price: "$25.000", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Cutlet_in_Poznan_City_Park.jpg/960px-Cutlet_in_Poznan_City_Park.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", ingredients: ["Ternera", "Papas o puré", "Huevo", "Ketchup"], pairing: "Ideal con agua o limonada." },
-      { id: "tagliatelle-bambino", name: "Tagliatelle bambino", description: "Pasta casera con salsa roja, blanca, mixta o aceite de oliva.", price: "$16.000", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Primer_plano_de_tallarines_argentinos_a_la_manteca_con_queso_rallado.jpg/960px-Primer_plano_de_tallarines_argentinos_a_la_manteca_con_queso_rallado.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail", ingredients: ["Tagliatelle casero", "Salsa a elección"], pairing: "Una opción simple para los más chicos.", tags: ["Vegetariano"] },
+      { id: "milanesa-bambino", name: "Milanesa bambino", description: "Con papas fritas o puré, huevo frito y ketchup.", price: "$25.000", image: "/images/menu/ninos/milanesa-bambino.jpg", ingredients: ["Ternera", "Papas o puré", "Huevo", "Ketchup"], pairing: "Ideal con agua o limonada." },
+      { id: "tagliatelle-bambino", name: "Tagliatelle bambino", description: "Pasta casera con salsa roja, blanca, mixta o aceite de oliva.", price: "$16.000", image: "/images/menu/ninos/tagliatelle-bambino.jpg", ingredients: ["Tagliatelle casero", "Salsa a elección"], pairing: "Una opción simple para los más chicos.", tags: ["Vegetariano"] },
     ],
   },
   {
