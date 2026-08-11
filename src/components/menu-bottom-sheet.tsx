@@ -23,7 +23,7 @@ export function MenuBottomSheet({ item, onClose }: MenuBottomSheetProps) {
     <div className="sheet-layer" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
       <section className="menu-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
         <div className="sheet-handle" aria-hidden="true" />
-        {item.image ? <div className="sheet-photo"><Image src={item.image} alt={item.name} fill sizes="(max-width: 640px) 100vw, 28rem" className="object-cover" /></div> : null}
+        {item.image ? <div className="sheet-photo"><Image src={item.image} alt={item.name} fill sizes="(max-width: 640px) 100vw, 28rem" className="object-cover" unoptimized={item.image.startsWith("http")} /></div> : null}
         <div className="sheet-content">
           <div className="flex items-start justify-between gap-5"><h2 id="sheet-title" className="font-display text-4xl font-semibold leading-none tracking-[-.035em]">{item.name}</h2><span className="pt-1 text-sm font-semibold text-muted-foreground">{item.price}</span></div>
           {item.description ? <p className="mt-4 leading-relaxed text-muted-foreground">{item.description}</p> : null}

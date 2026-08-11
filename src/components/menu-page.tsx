@@ -2,14 +2,16 @@ import { ArrowLeft, UtensilsCrossed } from "lucide-react";
 import Link from "next/link";
 
 import { MenuCategoryIndex } from "@/components/menu-category-index";
+import { menuCategories, type MenuCategory } from "@/lib/menu-data";
 
 interface MenuPageProps {
   tableLabel?: string;
   homePath?: string;
   menuPath?: string;
+  categories?: MenuCategory[];
 }
 
-export function MenuPage({ tableLabel = "Mesa 12", homePath = "/", menuPath = "/menu" }: MenuPageProps) {
+export function MenuPage({ tableLabel = "Mesa 12", homePath = "/", menuPath = "/menu", categories = menuCategories }: MenuPageProps) {
   return (
     <main className="menu-page relative mx-auto min-h-svh w-full max-w-md overflow-hidden bg-background text-foreground sm:my-8 sm:min-h-[calc(100svh-4rem)] sm:rounded-[2.25rem] sm:border sm:border-white/50 sm:shadow-[0_35px_100px_-45px_var(--shadow-ink)]">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-56 overflow-hidden" aria-hidden="true">
@@ -32,7 +34,7 @@ export function MenuPage({ tableLabel = "Mesa 12", homePath = "/", menuPath = "/
         </div>
       </header>
 
-      <MenuCategoryIndex basePath={menuPath} />
+      <MenuCategoryIndex basePath={menuPath} categories={categories} />
     </main>
   );
 }

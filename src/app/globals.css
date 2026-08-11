@@ -160,6 +160,8 @@ a { color: inherit; text-decoration: none; }
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
 .menu-item-card:hover { transform: translateY(-2px); box-shadow: 0 28px 65px -38px var(--shadow-ink); }
+.menu-item-card[data-unavailable="true"] { filter: grayscale(.9); opacity: .68; cursor: not-allowed; }
+.menu-item-card[data-unavailable="true"]:hover { transform: none; box-shadow: 0 18px 48px -38px var(--shadow-ink); }
 .menu-item-visual { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: var(--secondary); }
 .menu-item-visual img { transition: transform 500ms cubic-bezier(.22,1,.36,1); }
 .menu-item-card:hover .menu-item-visual img { transform: scale(1.025); }
@@ -175,6 +177,9 @@ a { color: inherit; text-decoration: none; }
 .menu-item-card[data-variant="ninos"] .menu-item-visual { aspect-ratio: 2.4 / 1; }
 .menu-item-card[data-variant="postres"] .menu-item-visual { aspect-ratio: 4 / 3; }
 .menu-featured { position: absolute; left: .8rem; top: .8rem; border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: .38rem .65rem; color: white; background: rgba(39,21,14,.55); box-shadow: 0 8px 18px rgba(26,14,9,.18); font-size: .62rem; font-weight: 720; letter-spacing: .04em; text-transform: uppercase; backdrop-filter: blur(10px); }
+.menu-sold-out { position: absolute; left: -12%; top: 45%; width: 124%; transform: rotate(-7deg); padding: .55rem .75rem; color: #fff; background: rgba(92, 92, 92, .9); font-size: .72rem; font-weight: 850; letter-spacing: .16em; text-align: center; text-transform: uppercase; }
+.menu-unavailable-ribbon { position: absolute; left: 0; right: 0; bottom: 0; padding: .55rem .75rem; color: #fff; background: rgba(105,105,105,.88); font-size: .72rem; font-weight: 850; letter-spacing: .12em; text-align: center; text-transform: uppercase; }
+.menu-unavailable-label { margin-top: .55rem; color: #858585; font-size: .76rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .menu-tag { border-radius: 999px; padding: 0.28rem 0.55rem; color: var(--primary); background: color-mix(in oklab, var(--primary) 9%, transparent); font-size: 0.64rem; font-weight: 700; letter-spacing: 0.015em; }
 .menu-dietary-icons { display: flex; align-items: center; gap: .4rem; }
 .menu-dietary-icon { display: inline-flex; }
