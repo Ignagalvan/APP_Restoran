@@ -1,7 +1,7 @@
 import { ArrowLeft, UtensilsCrossed } from "lucide-react";
 import Link from "next/link";
 
-import { MenuCategoryIndex } from "@/components/menu-category-index";
+import { LiveMenuIndex } from "@/components/live-menu-index";
 import type { MenuCategory } from "@/lib/menu-data";
 
 interface MenuPageProps {
@@ -34,7 +34,7 @@ export function MenuPage({ tableLabel = "Mesa 12", homePath = "/", menuPath = "/
         </div>
       </header>
 
-      <MenuCategoryIndex basePath={menuPath} categories={categories} />
+      <LiveMenuIndex basePath={menuPath} initialCategories={categories} />
     </main>
   );
 }

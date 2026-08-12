@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { MenuCategoryExperience } from "@/components/menu-category-experience";
+import { LiveMenuCategoryDetail } from "@/components/live-menu-category-detail";
 import type { MenuCategory, MenuCategoryAccent } from "@/lib/menu-data";
 
 interface MenuCategoryPageProps {
@@ -41,7 +41,7 @@ export function MenuCategoryPage({ categoryId, tableLabel = "Mesa 12", menuPath 
           <h1 id="menu-category-title" className="font-display text-[3.25rem] font-semibold leading-[.9] tracking-[-.045em] text-white">{category.name}</h1>
         </div>
       </header>
-      <MenuCategoryExperience category={category} />
+      <LiveMenuCategoryDetail categoryId={categoryId} initialCategories={categories} />
     </main>
   );
 }
