@@ -7,6 +7,7 @@ import { menuCategories } from "@/lib/menu-data";
 
 interface MenuCategoryIndexProps {
   basePath: string;
+  categories?: MenuCategory[];
 }
 
 const categoryImages: Record<MenuCategoryAccent, string> = {
@@ -25,11 +26,11 @@ const categoryIcons = {
   postres: Coffee,
 };
 
-export function MenuCategoryIndex({ basePath }: MenuCategoryIndexProps) {
+export function MenuCategoryIndex({ basePath, categories = menuCategories }: MenuCategoryIndexProps) {
   return (
     <section className="menu-index px-5 pb-[max(2rem,env(safe-area-inset-bottom))]" aria-label="Categorias del menu">
       <ul className="menu-category-grid">
-        {menuCategories.map((category) => (
+        {categories.map((category) => (
           <li key={category.id}>
             <CategoryLink category={category} href={`${basePath}/${category.id}`} />
           </li>

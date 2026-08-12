@@ -17,6 +17,8 @@ export interface MenuItem {
   section?: MenuSectionId;
   optionGroups?: MenuOptionGroup[];
   heading?: string;
+  available?: boolean;
+  stock?: number;
 }
 
 export interface MenuCategory {
