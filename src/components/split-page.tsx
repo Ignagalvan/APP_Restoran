@@ -1,18 +1,21 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
+import { LiveSplitExperience } from "@/components/live-split-experience";
 import { SplitExperience } from "@/components/split-experience";
-import { accountData } from "@/lib/account-data";
+import { accountData, type AccountData } from "@/lib/account-data";
 import { getAccountForTable } from "@/lib/table-context";
 
 interface SplitPageProps {
   tableLabel?: string;
   accountPath?: string;
   paymentPath?: string;
+  account?: AccountData;
+  mesa?: string;
 }
 
-export function SplitPage({ tableLabel = accountData.table, accountPath = "/account", paymentPath = "/payment" }: SplitPageProps) {
-  const account = getAccountForTable(tableLabel);
+export function SplitPage({ tableLabel = accountData.table, accountPath = "/account", paymentPath = "/payment", account: accountOverride, mesa }: SplitPageProps) {
+  const account = accountOverride ?? getAccountForTable(tableLabel);
 
   return (
     <main className="split-page relative mx-auto min-h-svh w-full max-w-md overflow-hidden bg-background text-foreground sm:my-8 sm:min-h-[calc(100svh-4rem)] sm:rounded-[2.25rem] sm:border sm:border-white/50 sm:shadow-[0_35px_100px_-45px_var(--shadow-ink)]">
@@ -32,7 +35,11 @@ export function SplitPage({ tableLabel = accountData.table, accountPath = "/acco
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground">Elegi unidades o una parte igual.</p>
         </div>
       </header>
-      <SplitExperience account={account} paymentPath={paymentPath} accountPath={accountPath} />
+      {mesa ? (
+        <LiveSplitExperience mesa={mesa} initialAccount={account} paymentPath={paymentPath} accountPath={accountPath} />
+      ) : (
+        <SplitExperience account={account} paymentPath={paymentPath} accountPath={accountPath} />
+      )}
     </main>
   );
 }

@@ -12,6 +12,8 @@ export interface AccountData {
   lastUpdated: string;
   items: AccountItemData[];
   paymentEnabled: boolean;
+  sessionId?: string;
+  billId?: string;
 }
 
 export const accountData: AccountData = {

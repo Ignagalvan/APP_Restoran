@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { SplitPage } from "@/components/split-page";
+import { getAccountForMesa } from "@/lib/get-table-account";
 import { getTableRouteContext } from "@/lib/table-context";
 
 export const metadata: Metadata = { title: "Dividir cuenta — Alma de Pueblo", description: "División de cuenta por QR de mesa" };
@@ -8,5 +9,6 @@ export const metadata: Metadata = { title: "Dividir cuenta — Alma de Pueblo", 
 export default async function TableSplitRoute({ params }: { params: Promise<{ mesa: string }> }) {
   const { mesa } = await params;
   const context = getTableRouteContext(mesa);
-  return <SplitPage tableLabel={context.tableLabel} accountPath={`${context.basePath}/account`} paymentPath={`${context.basePath}/payment`} />;
+  const account = await getAccountForMesa(mesa);
+  return <SplitPage tableLabel={context.tableLabel} accountPath={`${context.basePath}/account`} paymentPath={`${context.basePath}/payment`} account={account} mesa={mesa} />;
 }

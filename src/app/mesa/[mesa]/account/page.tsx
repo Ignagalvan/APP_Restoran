@@ -10,5 +10,5 @@ export default async function TableAccountRoute({ params }: { params: Promise<{ 
   const { mesa } = await params;
   const context = getTableRouteContext(mesa);
   const account = await getAccountForMesa(mesa);
-  return <AccountPage tableLabel={context.tableLabel} homePath={context.basePath} splitPath={`${context.basePath}/split`} paymentPath={`${context.basePath}/payment`} account={account} />;
+  return <AccountPage tableLabel={context.tableLabel} homePath={context.basePath} splitPath={`${context.basePath}/split`} paymentPath={`${context.basePath}/payment`} account={account} mesa={mesa} />;
 }
