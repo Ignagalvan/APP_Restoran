@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { MenuPage } from "@/components/menu-page";
-import { getRemoteMenuCategories } from "@/lib/remote-menu";
+import { getMenuCategories } from "@/lib/remote-menu";
 
 export const metadata: Metadata = {
   title: "Nuestra carta — Alma de Pueblo",
@@ -9,5 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default async function DigitalMenuPage() {
-  return <MenuPage categories={await getRemoteMenuCategories()} />;
+  const categories = await getMenuCategories();
+  return <MenuPage categories={categories} />;
 }

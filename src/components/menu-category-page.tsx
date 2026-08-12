@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { MenuCategoryExperience } from "@/components/menu-category-experience";
-import { menuCategories, type MenuCategory, type MenuCategoryAccent } from "@/lib/menu-data";
+import type { MenuCategory, MenuCategoryAccent } from "@/lib/menu-data";
 
 interface MenuCategoryPageProps {
   categoryId: string;
@@ -21,7 +21,7 @@ const categoryImages: Record<MenuCategoryAccent, string> = {
   postres: "/images/menu/postre.png",
 };
 
-export function MenuCategoryPage({ categoryId, tableLabel = "Mesa 12", menuPath = "/menu", categories = menuCategories }: MenuCategoryPageProps) {
+export function MenuCategoryPage({ categoryId, tableLabel = "Mesa 12", menuPath = "/menu", categories = [] }: MenuCategoryPageProps) {
   const category = categories.find((item) => item.id === categoryId);
   if (!category) notFound();
 

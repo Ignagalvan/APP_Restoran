@@ -3,11 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 import type { MenuCategory, MenuCategoryAccent } from "@/lib/menu-data";
-import { menuCategories } from "@/lib/menu-data";
 
 interface MenuCategoryIndexProps {
   basePath: string;
-  categories?: MenuCategory[];
+  categories: MenuCategory[];
 }
 
 const categoryImages: Record<MenuCategoryAccent, string> = {
@@ -26,7 +25,7 @@ const categoryIcons = {
   postres: Coffee,
 };
 
-export function MenuCategoryIndex({ basePath, categories = menuCategories }: MenuCategoryIndexProps) {
+export function MenuCategoryIndex({ basePath, categories }: MenuCategoryIndexProps) {
   return (
     <section className="menu-index px-5 pb-[max(2rem,env(safe-area-inset-bottom))]" aria-label="Categorias del menu">
       <ul className="menu-category-grid">

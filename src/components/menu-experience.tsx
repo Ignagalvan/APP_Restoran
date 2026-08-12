@@ -5,10 +5,10 @@ import { useCallback, useEffect, useState } from "react";
 import { MenuBottomSheet } from "@/components/menu-bottom-sheet";
 import { MenuCategoryTabs } from "@/components/menu-category-tabs";
 import { MenuItemCard } from "@/components/menu-item-card";
-import { menuCategories, type MenuItem } from "@/lib/menu-data";
+import { menuCategories, type MenuCategory, type MenuItem } from "@/lib/menu-data";
 
-export function MenuExperience() {
-  const [activeCategory, setActiveCategory] = useState(menuCategories[0].id);
+export function MenuExperience({ categories = menuCategories }: { categories?: MenuCategory[] } = {}) {
+  const [activeCategory, setActiveCategory] = useState(categories[0]?.id ?? "");
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const closeSheet = useCallback(() => setSelectedItem(null), []);
 
@@ -20,9 +20,9 @@ export function MenuExperience() {
       },
       { rootMargin: "-22% 0px -58%", threshold: [0.1, 0.4, 0.7] },
     );
-    menuCategories.forEach(({ id }) => { const section = document.getElementById(id); if (section) observer.observe(section); });
+    categories.forEach(({ id }) => { const section = document.getElementById(id); if (section) observer.observe(section); });
     return () => observer.disconnect();
-  }, []);
+  }, [categories]);
 
   const selectCategory = (categoryId: string) => {
     setActiveCategory(categoryId);
@@ -32,10 +32,10 @@ export function MenuExperience() {
   return (
     <>
       <div className="sticky top-0 z-20 border-y border-white/50 bg-background/88 px-5 py-3 backdrop-blur-xl">
-        <MenuCategoryTabs categories={menuCategories} activeCategory={activeCategory} onSelect={selectCategory} />
+        <MenuCategoryTabs categories={categories} activeCategory={activeCategory} onSelect={selectCategory} />
       </div>
       <div className="relative px-5 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-3">
-        {menuCategories.map((category) => (
+        {categories.map((category) => (
           <section key={category.id} id={category.id} className="scroll-mt-20 py-8" aria-labelledby={`${category.id}-title`}>
             <div className="mb-5 border-b border-foreground/10 pb-4">
               <div className="flex items-baseline justify-between gap-4"><h2 id={`${category.id}-title`} className="font-display text-3xl font-semibold tracking-[-0.025em]">{category.name}</h2><span className="text-xs font-medium text-muted-foreground">{category.items.length} opciones</span></div>
