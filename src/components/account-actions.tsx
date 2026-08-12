@@ -65,7 +65,7 @@ export function AccountActions({ account = accountData, splitPath = "/split", pa
         </button>
       ) : (
         <p className="account-payment-locked" role="status">
-          Pedile a tu mozo que habilite el pago para continuar.
+          Pedile a tu mozo que habilite el consumo web para continuar.
         </p>
       )}
       <p className="account-toast" role="status" aria-live="polite" data-visible={Boolean(message)}>

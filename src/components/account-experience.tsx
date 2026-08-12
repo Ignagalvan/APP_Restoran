@@ -16,12 +16,13 @@ export function AccountExperience({ account = accountData, splitPath = "/split",
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const closeSheet = useCallback(() => setSelectedItem(null), []);
   const selectItem = (itemId: string) => setSelectedItem(menuItems.find((item) => item.id === itemId) ?? null);
-  const hasConsumption = account.items.length > 0;
+  const canShowConsumption = account.consumptionEnabled;
+  const hasConsumption = canShowConsumption && account.items.length > 0;
 
   return (
     <>
       <div className="relative space-y-4 px-5 pb-[max(2rem,env(safe-area-inset-bottom))]">
-        {hasConsumption ? <AccountSummary account={account} onSelectItem={selectItem} /> : <EmptyAccountState />}
+        {hasConsumption ? <AccountSummary account={account} onSelectItem={selectItem} /> : <EmptyAccountState locked={!canShowConsumption} />}
         <AccountActions account={account} splitPath={splitPath} paymentPath={paymentPath} />
         <p className="px-5 pb-4 text-center text-xs leading-relaxed text-muted-foreground">Los importes mostrados corresponden al consumo registrado de la mesa.</p>
       </div>

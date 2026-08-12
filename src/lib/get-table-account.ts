@@ -34,21 +34,29 @@ export async function getAccountForMesa(mesa: string): Promise<AccountData> {
   const remoteAccount = await getRemoteAccountForMesa(mesa);
   if (remoteAccount) return remoteAccount;
 
+  const fallbackAccount = {
+    ...accountData,
+    table: `Mesa ${mesa}`,
+    items: [],
+    paymentEnabled: false,
+    consumptionEnabled: false,
+  };
+
   const repository = getRepository();
   const table = await repository.findTableByQrCode(mesa);
 
   if (!table) {
-    return { ...accountData, table: `Mesa ${mesa}` };
+    return fallbackAccount;
   }
 
   const session = await repository.getActiveSessionByTable(table.id);
   if (!session) {
-    return { ...accountData, table: table.label };
+    return { ...fallbackAccount, table: table.label };
   }
 
   const account = await repository.getAccountBySession(session.id);
   if (!account) {
-    return { ...accountData, table: table.label };
+    return { ...fallbackAccount, table: table.label };
   }
 
   const items = await repository.getAccountItems(account.id);
@@ -61,12 +69,15 @@ export async function getAccountForMesa(mesa: string): Promise<AccountData> {
     status: "open",
     lastUpdated: formatUpdatedAt(account.lastSyncedAt),
     paymentEnabled: account.paymentEnabled,
-    items: items.map((item) => ({
-      id: item.id,
-      name: item.name,
-      quantity: item.quantity,
-      unitPrice: item.unitPrice,
-    })),
+    consumptionEnabled: account.paymentEnabled,
+    items: account.paymentEnabled
+      ? items.map((item) => ({
+          id: item.id,
+          name: item.name,
+          quantity: item.quantity,
+          unitPrice: item.unitPrice,
+        }))
+      : [],
   };
 }
 
@@ -87,15 +98,18 @@ async function getRemoteAccountForMesa(mesa: string): Promise<AccountData | null
       })),
     );
 
+    const paymentEnabled = Boolean(payload.bill?.webPaymentEnabled);
+
     return {
       restaurant: payload.restaurant?.name ?? accountData.restaurant,
       table: formatTableLabel(payload.tables, mesa),
       status: "open",
       lastUpdated: formatUpdatedAt(payload.bill?.createdAt ?? payload.openedAt ?? new Date().toISOString()),
-      paymentEnabled: Boolean(payload.bill?.webPaymentEnabled),
+      paymentEnabled,
+      consumptionEnabled: paymentEnabled,
       sessionId: payload.sessionId,
       billId: payload.bill?.id,
-      items,
+      items: paymentEnabled ? items : [],
     };
   } catch {
     return null;

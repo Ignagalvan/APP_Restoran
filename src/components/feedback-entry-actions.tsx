@@ -5,7 +5,6 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { useFeedbackFlow } from "@/components/feedback-flow-context";
-import { accountData } from "@/lib/account-data";
 import { getGoogleReviewUrl } from "@/lib/google-review";
 import type { PaymentResultData } from "@/lib/payment-data";
 
