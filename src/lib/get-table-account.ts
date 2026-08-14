@@ -1,5 +1,6 @@
 import { accountData, type AccountData } from "@/lib/account-data";
 import { getRepository } from "@/server/storage/get-repository";
+import { getPublicTableForCode } from "@/lib/get-public-table";
 
 function formatUpdatedAt(iso: string) {
   return new Intl.DateTimeFormat("es-AR", { hour: "2-digit", minute: "2-digit" }).format(new Date(iso)) + " hs";
@@ -34,13 +35,17 @@ export async function getAccountForMesa(mesa: string): Promise<AccountData> {
   const remoteAccount = await getRemoteAccountForMesa(mesa);
   if (remoteAccount) return remoteAccount;
 
+  const publicTable = await getPublicTableForCode(mesa);
+
   const fallbackAccount = {
     ...accountData,
-    table: `Mesa ${mesa}`,
+    table: publicTable?.table.name ?? "Mesa",
     items: [],
     paymentEnabled: false,
     consumptionEnabled: false,
   };
+
+  if (process.env.NODE_ENV === "production") return fallbackAccount;
 
   const repository = getRepository();
   const table = await repository.findTableByQrCode(mesa);

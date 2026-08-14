@@ -1,17 +1,19 @@
 import { accountData, type AccountData } from "@/lib/account-data";
 
 export interface TableRouteContext {
+  tableCode: string;
   tableNumber: string;
   tableLabel: string;
   basePath: string;
 }
 
-export function getTableRouteContext(rawTable: string): TableRouteContext {
-  const tableNumber = rawTable.trim() || "12";
+export function getTableRouteContext(rawTable: string, tableLabel?: string): TableRouteContext {
+  const tableCode = rawTable.trim();
   return {
-    tableNumber,
-    tableLabel: `Mesa ${tableNumber}`,
-    basePath: `/mesa/${encodeURIComponent(tableNumber)}`,
+    tableCode,
+    tableNumber: tableCode,
+    tableLabel: tableLabel ?? "Mesa",
+    basePath: `/mesa/${encodeURIComponent(tableCode)}`,
   };
 }
 
