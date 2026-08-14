@@ -8,7 +8,9 @@ export default function TableNotFound() {
           <CircleAlert className="size-6" aria-hidden="true" />
         </span>
         <h1 className="mt-5 font-display text-3xl font-semibold">No encontramos esta mesa</h1>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">El QR puede no ser válido o la mesa ya no está visible. Pedile ayuda al personal del restaurante.</p>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          El QR puede no ser válido o la mesa ya no está visible. Pedile ayuda al personal del restaurante.
+        </p>
       </section>
     </main>
   );
