@@ -37,7 +37,7 @@ export function useLiveMenuCategories(initialCategories: MenuCategory[]) {
         if (!response.ok) return;
 
         const nextCategories = (await response.json()) as MenuCategory[];
-        if (!ignore && nextCategories.length > 0) setCategories(nextCategories);
+        if (!ignore) setCategories(nextCategories);
       } catch {
         // Keep the last known menu if the network is slow or Render is waking up.
       }

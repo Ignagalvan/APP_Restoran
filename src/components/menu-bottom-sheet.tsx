@@ -45,7 +45,7 @@ export function MenuBottomSheet({ item, onClose }: MenuBottomSheetProps) {
               <div className="menu-option-list">
                 {group.options.map((option) => (
                   <div key={option.id} className="menu-option">
-                    <span>{option.name}</span>{option.price ? <strong>{option.price}</strong> : null}
+                    <span>{option.name}{option.available === false ? " · Agotado" : ""}</span>{option.price ? <strong>{option.price}</strong> : null}
                   </div>
                 ))}
               </div>

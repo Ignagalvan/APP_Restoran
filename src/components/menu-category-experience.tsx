@@ -41,7 +41,7 @@ export function MenuCategoryExperience({ category }: MenuCategoryExperienceProps
           ))}
         </div>
       </section>
-      <MenuBottomSheet key={selectedItem?.id ?? "closed"} item={selectedItem} onClose={closeSheet} />
+      <MenuBottomSheet key={selectedItem?.id ?? "closed"} item={category.items.find(item => item.id === selectedItem?.id) ?? null} onClose={closeSheet} />
     </>
   );
 }

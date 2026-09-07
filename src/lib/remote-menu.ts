@@ -11,6 +11,8 @@ type ApiProduct = {
   price: string | number;
   available?: boolean | null;
   stock?: number | null;
+  producibleQuantity?: number | null;
+  options?: Array<{ key: string; name: string; selectable: boolean }>;
 };
 
 type ApiCategory = {
@@ -31,14 +33,14 @@ export async function getMenuCategories(): Promise<MenuCategory[]> {
       cache: "no-store",
     });
 
-    if (!response.ok) return menuCategories;
+    if (!response.ok) throw new Error("Menu unavailable");
 
     const rows = (await response.json()) as ApiCategory[];
     const categories = rows.map(mapCategory).filter((category): category is MenuCategory => Boolean(category));
 
-    return categories.length > 0 ? categories : menuCategories;
+    return categories;
   } catch {
-    return menuCategories;
+    return [];
   }
 }
 
@@ -52,7 +54,7 @@ function mapCategory(category: ApiCategory, index: number): MenuCategory | null 
 
   const localCategory = staticCategoryByName.get(normalizeText(category.name));
   const accent = localCategory?.accent ?? getAccent(category.name, index);
-  const items = (category.products ?? []).filter(isAvailable).map((product) => mapProduct(product, accent));
+  const items = (category.products ?? []).map((product) => mapProduct(product, accent));
 
   if (items.length === 0) return null;
 
@@ -62,7 +64,7 @@ function mapCategory(category: ApiCategory, index: number): MenuCategory | null 
     description: category.description ?? localCategory?.description ?? "Nuestra seleccion de la carta.",
     shortDescription: localCategory?.shortDescription ?? "Productos disponibles.",
     accent,
-    sections: localCategory?.sections,
+    sections: items.every(item => item.section) ? localCategory?.sections : undefined,
     items,
   };
 }
@@ -76,6 +78,9 @@ function mapProduct(product: ApiProduct, accent: MenuCategoryAccent): MenuItem {
     name: product.name,
     description: product.description ?? localItem?.description,
     price: formatPrice(product.price),
+    available: product.available !== false,
+    stock: product.producibleQuantity ?? undefined,
+    optionGroups: product.options ? [{ id: 'recipe-options', title: 'Opciones', description: 'Disponibilidad actual', options: product.options.map(option => ({ id: option.key, name: option.name, available: option.selectable })) }] : localItem?.optionGroups,
     image: normalizeImageUrl(product.imageUrl) ?? localItem?.image ?? fallbackImage(accent),
   };
 }
@@ -89,9 +94,6 @@ function restaurantSlug() {
   return process.env.MENU_RESTAURANT_SLUG ?? process.env.NEXT_PUBLIC_MENU_RESTAURANT_SLUG ?? DEFAULT_RESTAURANT_SLUG;
 }
 
-function isAvailable(product: ApiProduct) {
-  return product.available !== false && (product.stock == null || product.stock > 0);
-}
 
 function normalizeText(value: string) {
   return value
