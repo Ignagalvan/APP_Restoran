@@ -24,3 +24,17 @@ Resolver contradicciones según `04 - Decisiones\Fuentes de verdad.md`, distingu
 En cambios de API, modelos, estados, auth, eventos, WebSockets, pagos, pedidos, mesas o schemas, preguntar mentalmente “What else consumes this?” y revisar los cuatro repositorios según `Dependencias entre repositorios`.
 
 Validar el cambio con la comprobación proporcional al riesgo. Al finalizar, aplicar `04 - Decisiones\Política de relevancia.md`; actualizar una nota existente o crear un ADR solo si cambió arquitectura, contrato, regla, seguridad, operación, despliegue, responsabilidad entre repos o una solución reutilizable. No guardar secretos, `.env`, credenciales, logs ni bloques grandes de código.
+
+## Execution efficiency / stop policy
+
+- Definir antes de actuar una hipótesis, la evidencia necesaria y una condición de cierre. Cuando la evidencia alcance para decidir, completar, verificar o identificar un error concreto, detenerse; no investigar “por si acaso”.
+- Respetar el flujo de contexto anterior y usar exploración masiva del filesystem solo como fallback. Priorizar consultas estructurales, snippets, rangos y comandos focalizados.
+- Mantener el presupuesto orientativo de unos 8 archivos fuente antes de una hipótesis; si hicieran falta más, volver al índice. Si 3 operaciones exploratorias consecutivas no aportan información material, reevaluar el plan.
+- No releer ni reeditar archivos sin evidencia nueva. Si un archivo entra en un ciclo edit → verify repetido, revisar la causa antes de otra edición.
+- No repetir tests, lint, typecheck, build, Prisma ni otra validación que ya pasó si el código relevante no cambió después.
+- Validar proporcionalmente: cambio pequeño, checks focalizados; cambio normal, tests relevantes y typecheck; cambio arquitectónico o multirepo, ampliar según riesgo. No ejecutar el pipeline completo por defecto.
+- Ante fallos de entorno ajenos, diagnosticar lo mínimo y reportar; repararlos solo si bloquean la tarea. No corregir warnings ni fallos preexistentes fuera de alcance.
+- Evitar trabajo “ya que estamos”: sin refactors, limpiezas, upgrades, dependencias ni mejoras no pedidas salvo necesidad imprescindible para la corrección.
+- En deploys, comprobar una vez y esperar solo una ventana razonable; si continúa pendiente, reportar y detenerse, sin polling prolongado.
+- Expandir análisis cross-repo solo si cambian o se investigan contratos, APIs, modelos, estados o consumidores compartidos; no revisar los cuatro repos para cambios locales o visuales.
+- Mantener seguridad, corrección, integridad de datos y validaciones críticas por encima del ahorro. El informe final debe ser breve, factual y omitir exploraciones irrelevantes.
