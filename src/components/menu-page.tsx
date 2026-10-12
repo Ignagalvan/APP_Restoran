@@ -9,9 +9,11 @@ interface MenuPageProps {
   homePath?: string;
   menuPath?: string;
   categories: MenuCategory[];
+  preview?: boolean;
+  onSelectCategory?: (id: string) => void;
 }
 
-export function MenuPage({ tableLabel = "Mesa 12", homePath = "/", menuPath = "/menu", categories }: MenuPageProps) {
+export function MenuPage({ tableLabel = "Mesa 12", homePath = "/", menuPath = "/menu", categories, preview = false, onSelectCategory }: MenuPageProps) {
   return (
     <main className="menu-page relative mx-auto min-h-svh w-full max-w-md overflow-hidden bg-background text-foreground sm:my-8 sm:min-h-[calc(100svh-4rem)] sm:rounded-[2.25rem] sm:border sm:border-white/50 sm:shadow-[0_35px_100px_-45px_var(--shadow-ink)]">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-56 overflow-hidden" aria-hidden="true">
@@ -22,7 +24,7 @@ export function MenuPage({ tableLabel = "Mesa 12", homePath = "/", menuPath = "/
 
       <header className="relative px-5 pb-5 pt-[max(1.25rem,env(safe-area-inset-top))]">
         <div className="flex items-center justify-between">
-          <Link href={homePath} className="back-link" aria-label="Volver a la Home">
+          <Link href={homePath} onClick={preview ? event => event.preventDefault() : undefined} className="back-link" aria-label="Volver a la Home">
             <ArrowLeft className="size-5" strokeWidth={1.8} />
           </Link>
           <div className="table-badge"><span className="size-1.5 rounded-full bg-status shadow-[0_0_0_4px_var(--status-soft)]" />{tableLabel}</div>
@@ -34,7 +36,8 @@ export function MenuPage({ tableLabel = "Mesa 12", homePath = "/", menuPath = "/
         </div>
       </header>
 
-      <LiveMenuIndex basePath={menuPath} initialCategories={categories} />
+      {!categories.length ? <p className="px-5 py-10 text-center text-sm text-muted-foreground">No hay productos disponibles en este horario.</p> : null}
+      <LiveMenuIndex basePath={menuPath} initialCategories={categories} preview={preview} onSelectCategory={onSelectCategory} />
     </main>
   );
 }

@@ -8,18 +8,21 @@ import type { MenuCategory } from "@/lib/menu-data";
 interface LiveMenuIndexProps {
   basePath: string;
   initialCategories: MenuCategory[];
+  preview?: boolean;
+  onSelectCategory?: (id: string) => void;
 }
 
-export function LiveMenuIndex({ basePath, initialCategories }: LiveMenuIndexProps) {
-  const categories = useLiveMenuCategories(initialCategories);
+export function LiveMenuIndex({ basePath, initialCategories, preview = false, onSelectCategory }: LiveMenuIndexProps) {
+  const categories = useLiveMenuCategories(initialCategories, !preview);
 
-  return <MenuCategoryIndex basePath={basePath} categories={categories} />;
+  return <MenuCategoryIndex basePath={basePath} categories={categories} onSelectCategory={onSelectCategory} />;
 }
 
-export function useLiveMenuCategories(initialCategories: MenuCategory[]) {
+export function useLiveMenuCategories(initialCategories: MenuCategory[], live = true) {
   const [categories, setCategories] = useState(initialCategories);
 
   useEffect(() => {
+    if (!live) return;
     let ignore = false;
     let controller: AbortController | null = null;
 
@@ -52,7 +55,7 @@ export function useLiveMenuCategories(initialCategories: MenuCategory[]) {
       document.removeEventListener("visibilitychange", refresh);
       controller?.abort();
     };
-  }, []);
+  }, [live]);
 
-  return categories;
+  return live ? categories : initialCategories;
 }

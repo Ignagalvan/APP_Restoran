@@ -11,6 +11,8 @@ interface MenuCategoryPageProps {
   tableLabel?: string;
   menuPath?: string;
   categories?: MenuCategory[];
+  preview?: boolean;
+  onBack?: () => void;
 }
 
 const categoryImages: Record<MenuCategoryAccent, string> = {
@@ -21,7 +23,7 @@ const categoryImages: Record<MenuCategoryAccent, string> = {
   postres: "/images/menu/postre.png",
 };
 
-export function MenuCategoryPage({ categoryId, tableLabel = "Mesa 12", menuPath = "/menu", categories = [] }: MenuCategoryPageProps) {
+export function MenuCategoryPage({ categoryId, tableLabel = "Mesa 12", menuPath = "/menu", categories = [], preview = false, onBack }: MenuCategoryPageProps) {
   const category = categories.find((item) => item.id === categoryId);
   if (!category) notFound();
 
@@ -31,7 +33,7 @@ export function MenuCategoryPage({ categoryId, tableLabel = "Mesa 12", menuPath 
         <Image src={categoryImages[category.accent]} alt="" fill priority sizes="(max-width: 640px) 100vw, 28rem" className="object-cover" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(34,19,12,.18),rgba(34,19,12,.76))]" aria-hidden="true" />
         <div className="relative flex items-center justify-between">
-          <Link href={menuPath} className="back-link back-link--dark" aria-label="Volver a categorias">
+          <Link href={menuPath} onClick={onBack ? event => { event.preventDefault(); onBack(); } : undefined} className="back-link back-link--dark" aria-label="Volver a categorias">
             <ArrowLeft className="size-5" strokeWidth={1.8} />
           </Link>
           <div className="table-badge table-badge--dark"><span className="size-1.5 rounded-full bg-status shadow-[0_0_0_4px_var(--status-soft)]" />{tableLabel}</div>
@@ -41,7 +43,7 @@ export function MenuCategoryPage({ categoryId, tableLabel = "Mesa 12", menuPath 
           <h1 id="menu-category-title" className="font-display text-[3.25rem] font-semibold leading-[.9] tracking-[-.045em] text-white">{category.name}</h1>
         </div>
       </header>
-      <LiveMenuCategoryDetail categoryId={categoryId} initialCategories={categories} />
+      <LiveMenuCategoryDetail categoryId={categoryId} initialCategories={categories} preview={preview} />
     </main>
   );
 }

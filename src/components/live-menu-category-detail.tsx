@@ -7,10 +7,11 @@ import type { MenuCategory } from "@/lib/menu-data";
 interface LiveMenuCategoryDetailProps {
   categoryId: string;
   initialCategories: MenuCategory[];
+  preview?: boolean;
 }
 
-export function LiveMenuCategoryDetail({ categoryId, initialCategories }: LiveMenuCategoryDetailProps) {
-  const categories = useLiveMenuCategories(initialCategories);
+export function LiveMenuCategoryDetail({ categoryId, initialCategories, preview = false }: LiveMenuCategoryDetailProps) {
+  const categories = useLiveMenuCategories(initialCategories, !preview);
   const category = categories.find((item) => item.id === categoryId);
 
   if (!category) {
