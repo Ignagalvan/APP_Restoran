@@ -3,7 +3,7 @@ import { menuCategories, type MenuCategory, type MenuCategoryAccent, type MenuIt
 const DEFAULT_MENU_API_URL = "https://resto-management-backend-86xq.onrender.com/api/v1";
 const DEFAULT_RESTAURANT_SLUG = "alma-de-pueblo";
 
-type ApiProduct = {
+export type ApiProduct = {
   id: string;
   name: string;
   description?: string | null;
@@ -18,7 +18,7 @@ type ApiProduct = {
   optionGroups?: Array<{ id: string; question: string; required: boolean; multiple: boolean; maxChoices: number; alternatives: Array<{ key: string; name: string; selectable: boolean; surcharge: string }> }>;
 };
 
-type ApiCategory = {
+export type ApiCategory = {
   id?: string;
   name: string;
   description?: string | null;
@@ -39,12 +39,17 @@ export async function getMenuCategories(): Promise<MenuCategory[]> {
     if (!response.ok) throw new Error("Menu unavailable");
 
     const rows = (await response.json()) as ApiCategory[];
-    const categories = rows.map(mapCategory).filter((category): category is MenuCategory => Boolean(category));
+    const categories = mapApiMenu(rows);
 
     return categories;
   } catch {
     return [];
   }
+}
+
+// Used by both the public QR and the panel's embedded preview.
+export function mapApiMenu(rows: ApiCategory[]): MenuCategory[] {
+  return rows.map(mapCategory).filter((category): category is MenuCategory => Boolean(category));
 }
 
 export async function getMenuCategory(categoryId: string) {
@@ -77,16 +82,21 @@ function mapProduct(product: ApiProduct, accent: MenuCategoryAccent): MenuItem {
 
   return {
     ...localItem,
-    id: localItem?.id ?? product.id,
+    id: product.id,
     name: product.name,
     description: product.description ?? localItem?.description,
     price: formatPrice(product.price),
+    unitPrice: Number(product.price),
+    // Names in the demo catalog do not certify dietary properties or ingredients.
+    tags: undefined,
+    ingredients: undefined,
+    pairing: undefined,
     regularPrice: product.promotion ? formatPrice(product.regularPrice ?? product.price) : undefined,
     promotionName: product.promotion?.name,
     available: product.available !== false,
     stock: product.producibleQuantity ?? undefined,
     optionGroups: [
-      ...(product.optionGroups ?? []).map(group => ({ id: group.id, title: group.question, required: group.required, description: `${group.multiple ? `Hasta ${group.maxChoices} alternativas` : 'Una alternativa'} · ${group.required ? 'Elección obligatoria' : 'Opcional'}`, options: group.alternatives.map(option => ({ id: option.key, name: option.name, available: option.selectable, price: Number(option.surcharge) > 0 ? `+ ${formatPrice(option.surcharge)}` : 'Sin recargo' })) })),
+      ...(product.optionGroups ?? []).map(group => ({ id: group.id, title: group.question, required: group.required, multiple: group.multiple, maxChoices: group.maxChoices, description: `${group.multiple ? `Hasta ${group.maxChoices} alternativas` : 'Una alternativa'} · ${group.required ? 'Elección obligatoria' : 'Opcional'}`, options: group.alternatives.map(option => ({ id: option.key, name: option.name, available: option.selectable, surcharge: Number(option.surcharge), price: Number(option.surcharge) > 0 ? `+ ${formatPrice(option.surcharge)}` : 'Sin recargo' })) })),
       ...((product.options ?? []).some(option => !option.key.startsWith('menu:')) ? [{ id: 'recipe-options', title: 'Otras opciones', description: 'Disponibilidad actual', options: product.options!.filter(option => !option.key.startsWith('menu:')).map(option => ({ id: option.key, name: option.name, available: option.selectable })) }] : []),
     ],
     image: normalizeImageUrl(product.imageUrl) ?? localItem?.image ?? fallbackImage(accent),

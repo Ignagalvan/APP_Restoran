@@ -2,22 +2,29 @@
 
 import { Leaf, WheatOff } from "lucide-react";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import type { MenuItem } from "@/lib/menu-data";
+import { currentMenuChoices } from '@/lib/menu-option-choices';
 
 interface MenuBottomSheetProps { item: MenuItem | null; onClose: () => void; }
 
 export function MenuBottomSheet({ item, onClose }: MenuBottomSheetProps) {
+  const [choices, setChoices] = useState<Record<string, string[]>>({});
   useEffect(() => {
     if (!item) return;
     const onKeyDown = (event: KeyboardEvent) => { if (event.key === "Escape") onClose(); };
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKeyDown);
-    return () => { document.body.style.overflow = ""; window.removeEventListener("keydown", onKeyDown); };
+    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener("keydown", onKeyDown); };
   }, [item, onClose]);
 
   if (!item) return null;
+  const selectedChoices = currentMenuChoices(item.optionGroups ?? [], choices);
+  const extras = (item.optionGroups ?? []).reduce((sum, group) => sum + group.options.filter(option => selectedChoices[group.id]?.includes(option.id)).reduce((subtotal, option) => subtotal + Math.round((option.surcharge ?? 0) * 100), 0), 0);
+  const total = item.unitPrice === undefined ? null : (Math.round(item.unitPrice * 100) + extras) / 100;
+  const missing = (item.optionGroups ?? []).filter(group => group.required && !selectedChoices[group.id]?.length);
 
   return (
     <div className="sheet-layer" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
@@ -42,16 +49,18 @@ export function MenuBottomSheet({ item, onClose }: MenuBottomSheetProps) {
           {item.optionGroups?.map((group) => (
             <fieldset key={group.id} className="menu-option-group">
               <legend>{group.title}</legend>
-              <div className="menu-option-head"><p>{group.description}</p><span>Información</span></div>
+              <div className="menu-option-head"><p>{group.description}</p><span>{group.required ? 'Obligatoria' : 'Opcional'}</span></div>
               <div className="menu-option-list">
+                {!group.required && !group.multiple ? <label className="menu-option"><span className="flex items-center gap-3"><input type="radio" name={`menu-option-${group.id}`} checked={!selectedChoices[group.id]?.length} disabled={item.available === false} onChange={() => setChoices(current => ({ ...current, [group.id]: [] }))} />Sin selección</span></label> : null}
                 {group.options.map((option) => (
-                  <div key={option.id} className="menu-option">
-                    <span>{option.name}{option.available === false ? " · Agotado" : ""}</span>{option.price ? <strong>{option.price}</strong> : null}
-                  </div>
+                  <label key={option.id} className="menu-option">
+                    <span className="flex items-center gap-3"><input type={group.multiple ? 'checkbox' : 'radio'} name={`menu-option-${group.id}`} checked={selectedChoices[group.id]?.includes(option.id) ?? false} disabled={item.available === false || option.available === false || (group.multiple && !selectedChoices[group.id]?.includes(option.id) && selectedChoices[group.id].length >= (group.maxChoices ?? 1))} onChange={event => { const checked = event.target.checked; setChoices(current => ({ ...current, [group.id]: group.multiple ? checked ? [...selectedChoices[group.id], option.id] : selectedChoices[group.id].filter(id => id !== option.id) : [option.id] })); }} />{option.name}{option.available === false ? " · Agotado" : ""}</span>{option.price ? <strong>{option.price}</strong> : null}
+                  </label>
                 ))}
               </div>
             </fieldset>
           ))}
+          {total !== null && item.optionGroups?.length ? <div className="mt-5 border-t border-foreground/10 pt-4" aria-live="polite"><div className="flex justify-between gap-3 text-sm"><span>Precio con tu selección</span><strong>{new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 2 }).format(total)}</strong></div>{missing.length ? <p className="mt-2 text-xs text-muted-foreground">Falta elegir: {missing.map(group => group.title).join(', ')}.</p> : null}<p className="mt-2 text-xs text-muted-foreground">Confirmá tu elección con el mozo. Esto no envía un pedido.</p></div> : null}
           <button type="button" className="sheet-button" onClick={onClose}>Cerrar</button>
         </div>
       </section>

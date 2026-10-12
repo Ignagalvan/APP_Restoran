@@ -14,7 +14,8 @@ export function MenuCategoryExperience({ category }: MenuCategoryExperienceProps
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [activeSection, setActiveSection] = useState(category.sections?.[0]?.id);
   const closeSheet = useCallback(() => setSelectedItem(null), []);
-  const visibleItems = activeSection ? category.items.filter((item) => item.section === activeSection) : category.items;
+  const visibleSection = category.sections?.some(section => section.id === activeSection) ? activeSection : category.sections?.[0]?.id;
+  const visibleItems = visibleSection ? category.items.filter((item) => item.section === visibleSection) : category.items;
 
   return (
     <>
@@ -26,7 +27,7 @@ export function MenuCategoryExperience({ category }: MenuCategoryExperienceProps
         {category.sections?.length ? (
           <nav className="menu-section-tabs" aria-label="Secciones de la carta">
             {category.sections.map((section) => (
-              <button key={section.id} type="button" className="menu-section-tab" aria-pressed={activeSection === section.id} onClick={() => setActiveSection(section.id)}>
+              <button key={section.id} type="button" className="menu-section-tab" aria-pressed={visibleSection === section.id} onClick={() => setActiveSection(section.id)}>
                 {section.name} <span aria-hidden="true">{section.emoji}</span>
               </button>
             ))}

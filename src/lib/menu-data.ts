@@ -2,14 +2,15 @@ export type MenuTag = "Recomendado" | "Sin TACC" | "Vegetariano";
 export type MenuCategoryAccent = "entradas" | "principales" | "bebidas" | "ninos" | "postres";
 export type MenuSectionId = "principales" | "pastas" | "pizzas" | "ensaladas" | "vinos" | "sin-alcohol" | "cafeteria" | "cervezas" | "aperitivos" | "gin-vermu" | "whisky";
 
-export interface MenuOption { available?: boolean; id: string; name: string; price?: string; }
-export interface MenuOptionGroup { id: string; title: string; description: string; required?: boolean; options: MenuOption[]; }
+export interface MenuOption { available?: boolean; id: string; name: string; price?: string; surcharge?: number; }
+export interface MenuOptionGroup { id: string; title: string; description: string; required?: boolean; multiple?: boolean; maxChoices?: number; options: MenuOption[]; }
 
 export interface MenuItem {
   id: string;
   name: string;
   description?: string;
   price: string;
+  unitPrice?: number;
   regularPrice?: string;
   promotionName?: string;
   image?: string;

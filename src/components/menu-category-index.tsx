@@ -7,6 +7,7 @@ import type { MenuCategory, MenuCategoryAccent } from "@/lib/menu-data";
 interface MenuCategoryIndexProps {
   basePath: string;
   categories: MenuCategory[];
+  onSelectCategory?: (id: string) => void;
 }
 
 const categoryImages: Record<MenuCategoryAccent, string> = {
@@ -25,13 +26,13 @@ const categoryIcons = {
   postres: Coffee,
 };
 
-export function MenuCategoryIndex({ basePath, categories }: MenuCategoryIndexProps) {
+export function MenuCategoryIndex({ basePath, categories, onSelectCategory }: MenuCategoryIndexProps) {
   return (
     <section className="menu-index px-5 pb-[max(2rem,env(safe-area-inset-bottom))]" aria-label="Categorias del menu">
       <ul className="menu-category-grid">
         {categories.map((category) => (
           <li key={category.id}>
-            <CategoryLink category={category} href={`${basePath}/${category.id}`} />
+            <CategoryLink category={category} href={`${basePath}/${category.id}`} onSelect={onSelectCategory ? () => onSelectCategory(category.id) : undefined} />
           </li>
         ))}
       </ul>
@@ -39,11 +40,11 @@ export function MenuCategoryIndex({ basePath, categories }: MenuCategoryIndexPro
   );
 }
 
-function CategoryLink({ category, href }: { category: MenuCategory; href: string }) {
+function CategoryLink({ category, href, onSelect }: { category: MenuCategory; href: string; onSelect?: () => void }) {
   const Icon = categoryIcons[category.accent];
 
   return (
-    <Link href={href} className="menu-category-link" data-accent={category.accent}>
+    <Link href={href} onClick={onSelect ? (event) => { event.preventDefault(); onSelect(); } : undefined} className="menu-category-link" data-accent={category.accent}>
       <div className="menu-category-thumb">
         <Image src={categoryImages[category.accent]} alt="" fill sizes="7rem" className="object-cover" />
       </div>
