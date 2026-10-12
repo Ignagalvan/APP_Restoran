@@ -9,6 +9,8 @@ type ApiProduct = {
   description?: string | null;
   imageUrl?: string | null;
   price: string | number;
+  regularPrice?: string | number;
+  promotion?: { name: string } | null;
   available?: boolean | null;
   stock?: number | null;
   producibleQuantity?: number | null;
@@ -79,6 +81,8 @@ function mapProduct(product: ApiProduct, accent: MenuCategoryAccent): MenuItem {
     name: product.name,
     description: product.description ?? localItem?.description,
     price: formatPrice(product.price),
+    regularPrice: product.promotion ? formatPrice(product.regularPrice ?? product.price) : undefined,
+    promotionName: product.promotion?.name,
     available: product.available !== false,
     stock: product.producibleQuantity ?? undefined,
     optionGroups: [
