@@ -13,6 +13,7 @@ type ApiProduct = {
   stock?: number | null;
   producibleQuantity?: number | null;
   options?: Array<{ key: string; name: string; selectable: boolean }>;
+  optionGroups?: Array<{ id: string; question: string; required: boolean; multiple: boolean; maxChoices: number; alternatives: Array<{ key: string; name: string; selectable: boolean; surcharge: string }> }>;
 };
 
 type ApiCategory = {
@@ -80,7 +81,10 @@ function mapProduct(product: ApiProduct, accent: MenuCategoryAccent): MenuItem {
     price: formatPrice(product.price),
     available: product.available !== false,
     stock: product.producibleQuantity ?? undefined,
-    optionGroups: product.options ? [{ id: 'recipe-options', title: 'Opciones', description: 'Disponibilidad actual', options: product.options.map(option => ({ id: option.key, name: option.name, available: option.selectable })) }] : localItem?.optionGroups,
+    optionGroups: [
+      ...(product.optionGroups ?? []).map(group => ({ id: group.id, title: group.question, required: group.required, description: `${group.multiple ? `Hasta ${group.maxChoices} alternativas` : 'Una alternativa'} · ${group.required ? 'Elección obligatoria' : 'Opcional'}`, options: group.alternatives.map(option => ({ id: option.key, name: option.name, available: option.selectable, price: Number(option.surcharge) > 0 ? `+ ${formatPrice(option.surcharge)}` : 'Sin recargo' })) })),
+      ...((product.options ?? []).some(option => !option.key.startsWith('menu:')) ? [{ id: 'recipe-options', title: 'Otras opciones', description: 'Disponibilidad actual', options: product.options!.filter(option => !option.key.startsWith('menu:')).map(option => ({ id: option.key, name: option.name, available: option.selectable })) }] : []),
+    ],
     image: normalizeImageUrl(product.imageUrl) ?? localItem?.image ?? fallbackImage(accent),
   };
 }
@@ -135,5 +139,5 @@ function normalizeImageUrl(value?: string | null) {
 function formatPrice(value: string | number) {
   const amount = Number(value);
   if (!Number.isFinite(amount)) return `$ ${value}`;
-  return new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 }).format(amount);
+  return new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(amount);
 }
