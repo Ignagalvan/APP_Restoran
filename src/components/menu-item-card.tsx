@@ -21,9 +21,10 @@ export function MenuItemCard({ item, onSelect, variant = "entradas" }: MenuItemC
       <div className="menu-item-content">
         <div className="flex items-start justify-between gap-4">
           <h3 className="text-[1.02rem] font-semibold leading-tight tracking-[-0.015em]">{item.name}</h3>
-          <p className="shrink-0 text-xs font-semibold text-muted-foreground">{item.price}</p>
+          <div className="shrink-0 text-right text-xs"><p className="font-semibold">{item.price}</p>{item.regularPrice ? <del className="text-muted-foreground">{item.regularPrice}</del> : null}</div>
         </div>
         {unavailable ? <p className="menu-unavailable-label">No disponible</p> : null}
+        {item.promotionName ? <p className="mt-2 text-xs font-medium">{item.promotionName} · No acumulable · Extras aparte</p> : null}
         {item.description ? <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p> : null}
         {item.tags?.includes("Vegetariano") || item.tags?.includes("Sin TACC") ? (
           <div className="menu-dietary-icons mt-2">

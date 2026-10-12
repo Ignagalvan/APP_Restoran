@@ -10,6 +10,8 @@ export interface MenuItem {
   name: string;
   description?: string;
   price: string;
+  regularPrice?: string;
+  promotionName?: string;
   image?: string;
   ingredients?: string[];
   pairing?: string;

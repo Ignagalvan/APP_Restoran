@@ -25,7 +25,8 @@ export function MenuBottomSheet({ item, onClose }: MenuBottomSheetProps) {
         <div className="sheet-handle" aria-hidden="true" />
         {item.image ? <div className="sheet-photo"><Image src={item.image} alt={item.name} fill sizes="(max-width: 640px) 100vw, 28rem" className="object-cover" unoptimized={item.image.startsWith("http")} /></div> : null}
         <div className="sheet-content">
-          <div className="flex items-start justify-between gap-5"><h2 id="sheet-title" className="font-display text-4xl font-semibold leading-none tracking-[-.035em]">{item.name}</h2><span className="pt-1 text-sm font-semibold text-muted-foreground">{item.price}</span></div>
+          <div className="flex items-start justify-between gap-5"><h2 id="sheet-title" className="font-display text-4xl font-semibold leading-none tracking-[-.035em]">{item.name}</h2><div className="shrink-0 pt-1 text-right text-sm"><span className="font-semibold">{item.price}</span>{item.regularPrice ? <del className="block text-xs text-muted-foreground">{item.regularPrice}</del> : null}</div></div>
+          {item.promotionName ? <p className="mt-2 text-xs">{item.promotionName} · No acumulable · Extras aparte</p> : null}
           {item.description ? <p className="mt-4 leading-relaxed text-muted-foreground">{item.description}</p> : null}
           {item.tags?.includes("Vegetariano") || item.tags?.includes("Sin TACC") ? (
             <div className="menu-dietary-icons mt-3">
