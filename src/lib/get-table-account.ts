@@ -121,12 +121,12 @@ async function getRemoteAccountForMesa(mesa: string): Promise<AccountData | null
   }
 }
 
-function apiBaseUrl() {
+export function apiBaseUrl() {
   const configured = process.env.MENU_API_URL ?? process.env.NEXT_PUBLIC_MENU_API_URL ?? DEFAULT_MENU_API_URL;
   return configured.replace(/\/+$/, "");
 }
 
-function restaurantSlug() {
+export function restaurantSlug() {
   return process.env.MENU_RESTAURANT_SLUG ?? process.env.NEXT_PUBLIC_MENU_RESTAURANT_SLUG ?? DEFAULT_RESTAURANT_SLUG;
 }
 
